@@ -1,0 +1,53 @@
+ext {
+    coreLibs = [
+            // Core
+            "androidx.core:core-ktx:$core_ktx_version",
+            // Hilt
+            "com.google.dagger:hilt-android:$hilt_version",
+    ]
+    
+    uiLibs = [
+            // Theming
+            "com.google.android.material:material:$material_version"
+    ]
+    
+    lifecycleLibs = [
+            "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_version",
+            "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+            "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    ]
+
+    jetpackComposeLibs = [
+            // Integration with activities
+            "androidx.activity:activity-compose:$compose_activity_version",
+            // Compose Material Design
+            "androidx.compose.material3:material3:$compose_material_version",
+            "androidx.compose.ui:ui:$compose_version",
+            // Animations
+            "androidx.compose.animation:animation:$compose_version",
+            // Tooling support (Previews, etc.)
+            "androidx.compose.ui:ui-tooling-preview:$compose_version",
+            // Integration with ViewModels
+            "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_viewmodel_version",
+            "androidx.compose.runtime:runtime-livedata:$compose_version",
+            // Navigation
+            "androidx.navigation:navigation-compose:$compose_navigation_version",
+            "androidx.hilt:hilt-navigation-compose:$hilt_androidx_version",
+            // Constraint Layout,
+            "androidx.constraintlayout:constraintlayout-compose:$compose_constraint_layout_version"
+    ]
+
+    jetpackComposeLibsDebug = [
+            // Tooling support (Previews, etc.)
+            "androidx.compose.ui:ui-tooling:$compose_version"
+    ]
+
+    dataStoreLibs = [
+            "androidx.datastore:datastore:$datastore_version",
+            "com.google.protobuf:protobuf-javalite:$protobuf_version"
+    ]
+
+    coreLibsKapt = [
+            "com.google.dagger:hilt-compiler:$hilt_version"
+    ]
+} 

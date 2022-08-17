@@ -1,12 +1,79 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext {
-        compose_version = '1.1.0-beta01'
+    
+    apply from: 'constants.gradle'
+    apply from: 'dependencies.gradle'
+
+    repositories {
+        google()
+        mavenCentral()
     }
-}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+    dependencies {
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+//        classpath "org.owasp:dependency-check-gradle:$dependency_check_version"
+    }
+}
+
 plugins {
-    id 'com.android.application' version '7.2.0' apply false
-    id 'com.android.library' version '7.2.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.5.31' apply false
+    id 'com.android.application' version '7.2.1' apply false
+    id 'com.android.library' version '7.2.1' apply false
+    id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
+    id "com.github.ben-manes.versions" version '0.42.0'
+    id 'com.autonomousapps.dependency-analysis' version '1.10.0'
+    id 'org.owasp.dependencycheck' version "$dependency_check_version"
+}
+
+
+dependencyAnalysis {
+    issues {
+        all {
+            onUnusedDependencies {
+                severity('fail')
+            }
+            onUsedTransitiveDependencies {
+                severity('warn')
+            }
+            onIncorrectConfiguration {
+                severity('fail')
+            }
+            onUnusedAnnotationProcessors {
+                severity('fail')
+            }
+            onRedundantPlugins {
+                severity('fail')
+            }
+            // Ignore ktx dependencies if a transitive dependency is used
+            ignoreKtx(true)
+        }
+    }
+}
+
+dependencyCheck {
+    format = 'HTML'
+    failOnError = false
+// Will not cause a failed build if there are vulnerabilities
+    failBuildOnCVSS = 11
+// This if using a CI output directory (using Bitrise as an example)
+//    outputDirectory = System.env.BITRISE_DEPLOY_DIR
+}
+
+def isNonStable = { String version ->
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+tasks.named("dependencyUpdates").configure {
+    resolutionStrategy {
+        componentSelection {
+            all {
+                if (isNonStable(it.candidate.version) && !isNonStable(it.currentVersion)) {
+                    reject('Release candidate')
+                }
+            }
+        }
+    }
 }
 
 task clean(type: Delete) {
