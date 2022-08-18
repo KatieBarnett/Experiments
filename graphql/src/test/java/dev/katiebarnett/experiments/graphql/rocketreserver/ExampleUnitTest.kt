@@ -1,4 +1,4 @@
-package com.example.rocketreserver
+package dev.katiebarnett.experiments.graphql.rocketreserver
 
 import org.junit.Test
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/launchListFragment"
-        android:name="com.example.rocketreserver.LaunchListFragment"
+        android:name="dev.katiebarnett.experiments.graphql.rocketreserver.LaunchListFragment"
         tools:layout="@layout/launch_list_fragment">
         <action
             android:id="@+id/openLaunchDetails"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/launch_details_fragment"
-        android:name="com.example.rocketreserver.LaunchDetailsFragment"
+        android:name="dev.katiebarnett.experiments.graphql.rocketreserver.LaunchDetailsFragment"
         tools:layout="@layout/launch_details_fragment">
         <argument
             android:name="launchId"
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/login_fragment"
-        android:name="com.example.rocketreserver.LoginFragment"
+        android:name="dev.katiebarnett.experiments.graphql.rocketreserver.LoginFragment"
         tools:layout="@layout/login_fragment" />
 
 </navigation>

@@ -1,9 +1,9 @@
-package com.example.rocketreserver
+package dev.katiebarnett.experiments.graphql.rocketreserver
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rocketreserver.databinding.LaunchItemBinding
+import dev.katiebarnett.experiments.graphql.databinding.LaunchItemBinding
 
 class LaunchListAdapter() :
     RecyclerView.Adapter<LaunchListAdapter.ViewHolder>() {

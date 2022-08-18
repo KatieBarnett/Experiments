@@ -1,7 +1,8 @@
-package com.example.rocketreserver
+package dev.katiebarnett.experiments.graphql.rocketreserver
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dev.katiebarnett.experiments.graphql.R
 
 class MainActivity : AppCompatActivity() {
 

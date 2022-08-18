@@ -1,11 +1,11 @@
-package com.example.rocketreserver
+package dev.katiebarnett.experiments.graphql.rocketreserver
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.rocketreserver.databinding.LoginFragmentBinding
+import dev.katiebarnett.experiments.graphql.databinding.LoginFragmentBinding
 
 class LoginFragment : Fragment() {
     private lateinit var binding: LoginFragmentBinding

@@ -1,4 +1,4 @@
-package com.example.rocketreserver
+package dev.katiebarnett.experiments.graphql.rocketreserver
 
 import android.content.Context
 import android.content.SharedPreferences
