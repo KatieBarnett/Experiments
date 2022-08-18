@@ -58,23 +58,23 @@ internal fun AnimatedScaleInTransition(
 }
 
 @Composable
-fun ModalTransitionDialog(
+fun AnimatedTransitionDialog(
     onDismissRequest: () -> Unit,
     contentAlignment: Alignment = Alignment.Center,
-    content: @Composable (ModalTransitionDialogHelper) -> Unit
+    content: @Composable (AnimatedTransitionDialogHelper) -> Unit
 ) {
-    val onCloseSharedFlow: MutableSharedFlow<Any> = remember { MutableSharedFlow() }
+    val onDismissSharedFlow: MutableSharedFlow<Any> = remember { MutableSharedFlow() }
     val coroutineScope: CoroutineScope = rememberCoroutineScope()
-    val animateContentBackTrigger = remember { mutableStateOf(false) }
+    val animateTrigger = remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = Unit) {
         launch {
             delay(DIALOG_BUILD_TIME)
-            animateContentBackTrigger.value = true
+            animateTrigger.value = true
         }
         launch {
-            onCloseSharedFlow.asSharedFlow().collectLatest { 
-                startDismissWithExitAnimation(animateContentBackTrigger, onDismissRequest) 
+            onDismissSharedFlow.asSharedFlow().collectLatest { 
+                startDismissWithExitAnimation(animateTrigger, onDismissRequest) 
             }
         }
     }
@@ -82,36 +82,63 @@ fun ModalTransitionDialog(
     Dialog(
         onDismissRequest = { 
             coroutineScope.launch { 
-                startDismissWithExitAnimation(animateContentBackTrigger, onDismissRequest) 
+                startDismissWithExitAnimation(animateTrigger, onDismissRequest) 
             } 
         }
     ) {
         Box(contentAlignment = contentAlignment, 
             modifier = Modifier.fillMaxSize() 
         ) { 
-            AnimatedScaleInTransition(visible = animateContentBackTrigger.value) {
-                content(ModalTransitionDialogHelper(coroutineScope, onCloseSharedFlow))
+            AnimatedScaleInTransition(visible = animateTrigger.value) {
+                content(AnimatedTransitionDialogHelper(coroutineScope, onDismissSharedFlow))
             }
         }
     }
 }
 
 
-class ModalTransitionDialogHelper(
+@Composable
+fun AnimatedTransitionDialogEntryOnly(
+    onDismissRequest: () -> Unit,
+    contentAlignment: Alignment = Alignment.Center,
+    content: @Composable () -> Unit
+) {
+    val animateTrigger = remember { mutableStateOf(false) }
+    LaunchedEffect(key1 = Unit) {
+        launch {
+            delay(DIALOG_BUILD_TIME)
+            animateTrigger.value = true
+        }
+    }
+    Dialog(
+        onDismissRequest = onDismissRequest
+    ) {
+        Box(contentAlignment = contentAlignment,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            AnimatedScaleInTransition(visible = animateTrigger.value) {
+                content()
+            }
+        }
+    }
+}
+
+class AnimatedTransitionDialogHelper(
     private val coroutineScope: CoroutineScope, 
-    private val onCloseFlow: MutableSharedFlow<Any>) {
-    fun triggerAnimatedClose() {
+    private val onDismissFlow: MutableSharedFlow<Any>) {
+    
+    fun triggerAnimatedDismiss() {
         coroutineScope.launch {
-            onCloseFlow.emit(Any())
+            onDismissFlow.emit(Any())
         }
     }
 }
 
 suspend fun startDismissWithExitAnimation(
-    animateContentBackTrigger: MutableState<Boolean>,
+    animateTrigger: MutableState<Boolean>,
     onDismissRequest: () -> Unit
 ) {
-    animateContentBackTrigger.value = false
+    animateTrigger.value = false
     delay(ANIMATION_TIME)
     onDismissRequest()
 }

@@ -44,9 +44,10 @@ fun RegularDialog(buttonAction: () -> Unit,
 
 @Composable
 fun AnimatedDialog(buttonAction: () -> Unit,
-                  onDismissRequest: () -> Unit
+                   onDismissRequest: () -> Unit,
+                   animatedTransitionDialogHelper: AnimatedTransitionDialogHelper
 ) {
-    ModalTransitionDialog(onDismissRequest = onDismissRequest) { modalTransitionDialogHelper ->
+    AnimatedTransitionDialog(onDismissRequest = onDismissRequest) { 
         Surface(
             shape = RoundedCornerShape(10.dp),
             color = MaterialTheme.colorScheme.surface,
@@ -60,7 +61,34 @@ fun AnimatedDialog(buttonAction: () -> Unit,
                 Text("This is an animated dialog")
                 Button(onClick = {
                     buttonAction.invoke()
-                    modalTransitionDialogHelper::triggerAnimatedClose.invoke()
+                    animatedTransitionDialogHelper::triggerAnimatedDismiss.invoke()
+                }) {
+                    Text("Close Button")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun AnimatedEntryDialog(buttonAction: () -> Unit,
+                   onDismissRequest: () -> Unit
+) {
+    AnimatedTransitionDialogEntryOnly(onDismissRequest = onDismissRequest) {
+        Surface(
+            shape = RoundedCornerShape(10.dp),
+            color = MaterialTheme.colorScheme.surface,
+            modifier = Modifier
+        ) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text("This is an animated dialog with entry animation")
+                Button(onClick = {
+                    buttonAction.invoke()
+                    onDismissRequest.invoke()
                 }) {
                     Text("Close Button")
                 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.katiebarnett.experiments.jcdialoganim.components.AnimatedDialog
+import dev.katiebarnett.experiments.jcdialoganim.components.AnimatedEntryDialog
 import dev.katiebarnett.experiments.jcdialoganim.components.RegularDialog
 import dev.katiebarnett.experiments.jcdialoganim.ui.theme.ExperimentsTheme
 
@@ -65,21 +66,39 @@ fun MainScreen(viewModel: MainViewModel) {
         )
     }
 
+    val isAnimatedEntryDialogDisplayed by viewModel.isAnimatedEntryDialogDisplayed.observeAsState(false)
+
+    if (isAnimatedEntryDialogDisplayed) {
+        AnimatedEntryDialog(
+            buttonAction = {
+                // Do something
+            },
+            onDismissRequest = {
+                viewModel.isAnimatedEntryDialogDisplayed.postValue(false)
+            }
+        )
+    }
+
     MainContent(
         onRegularButtonClick = { viewModel.isRegularDialogDisplayed.postValue(true) }, 
-        onAnimatedButtonClick = { viewModel.isAnimatedDialogDisplayed.postValue(true) }
+        onAnimatedButtonClick = { viewModel.isAnimatedDialogDisplayed.postValue(true) },
+        onAnimatedEntryButtonClick = { viewModel.isAnimatedEntryDialogDisplayed.postValue(true) }
     )
 }
 
 @Composable
 fun MainContent(
     onRegularButtonClick: () -> Unit,
-    onAnimatedButtonClick: () -> Unit,) { 
+    onAnimatedButtonClick: () -> Unit,
+    onAnimatedEntryButtonClick: () -> Unit) { 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(onClick = onRegularButtonClick) {
             Text(text = "Open regular dialog")
+        }
+        Button(onClick = onAnimatedEntryButtonClick) {
+            Text(text = "Open animated entry dialog")
         }
         Button(onClick = onAnimatedButtonClick) {
             Text(text = "Open animated dialog")
@@ -91,6 +110,6 @@ fun MainContent(
 @Composable
 fun DefaultPreview() {
     ExperimentsTheme {
-        MainContent({}, {})
+        MainContent({}, {}, {})
     }
 }
