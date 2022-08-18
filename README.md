@@ -1,2 +1,2 @@
 # Experiments
-Android development experiments and demos
+Android development experiments, tutorials and demos.
