@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "Experiments"
 include ':app'
 include ':jc-dialoganim'
+include ':graphql'
