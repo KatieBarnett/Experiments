@@ -96,6 +96,39 @@ fun AnimatedTransitionDialog(
     }
 }
 
+@Composable
+fun AnimatedTransitionDialogNoAnimatedButtonDismiss(
+    onDismissRequest: () -> Unit,
+    contentAlignment: Alignment = Alignment.Center,
+    content: @Composable () -> Unit
+) {
+    val coroutineScope: CoroutineScope = rememberCoroutineScope()
+    val animateTrigger = remember { mutableStateOf(false) }
+
+    LaunchedEffect(key1 = Unit) {
+        launch {
+            delay(DIALOG_BUILD_TIME)
+            animateTrigger.value = true
+        }
+    }
+
+    Dialog(
+        onDismissRequest = {
+            coroutineScope.launch {
+                startDismissWithExitAnimation(animateTrigger, onDismissRequest)
+            }
+        }
+    ) {
+        Box(contentAlignment = contentAlignment,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            AnimatedScaleInTransition(visible = animateTrigger.value) {
+                content()
+            }
+        }
+    }
+}
+
 
 @Composable
 fun AnimatedTransitionDialogEntryOnly(

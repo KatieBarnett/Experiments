@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.katiebarnett.experiments.jcdialoganim.components.AnimatedDialog
+import dev.katiebarnett.experiments.jcdialoganim.components.AnimatedDialogNoAnimatedButtonDismiss
 import dev.katiebarnett.experiments.jcdialoganim.components.AnimatedEntryDialog
 import dev.katiebarnett.experiments.jcdialoganim.components.RegularDialog
 import dev.katiebarnett.experiments.jcdialoganim.ui.theme.ExperimentsTheme
@@ -79,10 +80,24 @@ fun MainScreen(viewModel: MainViewModel) {
         )
     }
 
+    val isAnimatedNoButtonDismissDialogDisplayed by viewModel.isAnimatedNoButtonDismissDialogDisplayed.observeAsState(false)
+
+    if (isAnimatedNoButtonDismissDialogDisplayed) {
+        AnimatedDialogNoAnimatedButtonDismiss(
+            buttonAction = {
+                // Do something
+            },
+            onDismissRequest = {
+                viewModel.isAnimatedNoButtonDismissDialogDisplayed.postValue(false)
+            }
+        )
+    }
+
     MainContent(
         onRegularButtonClick = { viewModel.isRegularDialogDisplayed.postValue(true) }, 
         onAnimatedButtonClick = { viewModel.isAnimatedDialogDisplayed.postValue(true) },
-        onAnimatedEntryButtonClick = { viewModel.isAnimatedEntryDialogDisplayed.postValue(true) }
+        onAnimatedEntryButtonClick = { viewModel.isAnimatedEntryDialogDisplayed.postValue(true) },
+        onAnimatedNoButtonDismissButtonClick = { viewModel.isAnimatedNoButtonDismissDialogDisplayed.postValue(true) }
     )
 }
 
@@ -90,7 +105,8 @@ fun MainScreen(viewModel: MainViewModel) {
 fun MainContent(
     onRegularButtonClick: () -> Unit,
     onAnimatedButtonClick: () -> Unit,
-    onAnimatedEntryButtonClick: () -> Unit) { 
+    onAnimatedEntryButtonClick: () -> Unit,
+    onAnimatedNoButtonDismissButtonClick: () -> Unit) { 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -99,6 +115,9 @@ fun MainContent(
         }
         Button(onClick = onAnimatedEntryButtonClick) {
             Text(text = "Open animated entry dialog")
+        }
+        Button(onClick = onAnimatedNoButtonDismissButtonClick) {
+            Text(text = "Open animated dialog with no button dismiss")
         }
         Button(onClick = onAnimatedButtonClick) {
             Text(text = "Open animated dialog")
@@ -110,6 +129,6 @@ fun MainContent(
 @Composable
 fun DefaultPreview() {
     ExperimentsTheme {
-        MainContent({}, {}, {})
+        MainContent({}, {}, {}, {})
     }
 }

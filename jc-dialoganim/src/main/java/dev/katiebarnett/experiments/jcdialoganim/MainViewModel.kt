@@ -13,4 +13,6 @@ open class MainViewModel @Inject constructor(
     val isRegularDialogDisplayed = MutableLiveData(false)
     val isAnimatedDialogDisplayed = MutableLiveData(false)
     val isAnimatedEntryDialogDisplayed = MutableLiveData(false)
+    val isAnimatedNoButtonDismissDialogDisplayed = MutableLiveData(false)
+    
 }
