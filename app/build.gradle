@@ -82,6 +82,8 @@ android {
 }
 
 dependencies {
+    
+    implementation project(':core')
 
     implementation coreLibs
     implementation uiLibs

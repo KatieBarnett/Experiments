@@ -20,7 +20,7 @@ import dev.katiebarnett.experiments.jcdialoganim.components.AnimatedDialog
 import dev.katiebarnett.experiments.jcdialoganim.components.AnimatedDialogNoAnimatedButtonDismiss
 import dev.katiebarnett.experiments.jcdialoganim.components.AnimatedEntryDialog
 import dev.katiebarnett.experiments.jcdialoganim.components.RegularDialog
-import dev.katiebarnett.experiments.jcdialoganim.ui.theme.ExperimentsTheme
+import dev.katiebarnett.experiments.core.theme.ExperimentsTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

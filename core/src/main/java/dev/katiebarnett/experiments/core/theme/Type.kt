@@ -1,4 +1,4 @@
-package dev.katiebarnett.experiments.ui.theme
+package dev.katiebarnett.experiments.core.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
