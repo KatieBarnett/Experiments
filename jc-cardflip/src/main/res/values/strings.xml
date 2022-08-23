@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Jetpack Compose Card Flip</string>
+
+
+    <string name="card_back_text">Let\'s get flippin\'</string>
+
+
+
+    <string name="button_flip">Flip!</string>
+    <string name="empty_stack">Empty Stack</string>
+
+
+    <string name="card_value_1">1</string>
+    <string name="card_value_2">1</string>
+    <string name="card_value_3">1</string>
+    <string name="card_value_4">1</string>
+    <string name="card_value_5">1</string>
+    <string name="card_value_6">1</string>
+    <string name="card_value_7">1</string>
+    <string name="card_value_8">1</string>
+    <string name="card_value_9">1</string>
+    <string name="card_value_10">1</string>
+    <string name="card_value_J">J</string>
+    <string name="card_value_Q">Q</string>
+    <string name="card_value_K">K</string>
+    <string name="card_value_A">A</string>
+    
+    
+</resources>
