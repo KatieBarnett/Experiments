@@ -25,11 +25,11 @@ import dev.katiebarnett.experiments.jccardflip.models.CardBack
 import dev.katiebarnett.experiments.jccardflip.models.CardFront
 
 @Composable
-fun Stack(stack: List<Card>,
+fun Stack(deck: List<Card>,
           position: Int,
           modifier: Modifier = Modifier) {
     val viewModel = hiltViewModel<StackViewModel>()
-    viewModel.setStack(stack)
+    viewModel.setDeck(deck)
     viewModel.setPosition(position)
     Box(
         modifier = modifier,
@@ -37,12 +37,35 @@ fun Stack(stack: List<Card>,
     ) {
         StackLayout(
             flipCard = viewModel.flipCard,
-            leftStack = {
-                CardFaceDisplay(cardFace = viewModel.leftStackTop?.back)
-            }, rightStack = {
-                CardFaceDisplay(cardFace = viewModel.rightStackTop?.front)
+            leftStack = { modifier ->
+                CardFaceDisplay(cardFace = viewModel.leftStackTop?.back, modifier)
+            }, rightStack = { modifier ->
+                CardFaceDisplay(cardFace = viewModel.rightStackTop?.front, modifier)
             }, 
             transitionTrigger = position, 
+            modifier = modifier
+        )
+    }
+}
+
+@Composable
+fun NonAnimatedStack(deck: List<Card>,
+                     position: Int,
+                     modifier: Modifier = Modifier) {
+    val viewModel = hiltViewModel<StackViewModel>()
+    viewModel.setDeck(deck)
+    viewModel.setPosition(position)
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        NonAnimatedStackLayout(
+            flipCard = viewModel.flipCard,
+            leftStack = { modifier ->
+                CardFaceDisplay(cardFace = viewModel.leftStackTop?.back, modifier)
+            }, rightStack = { modifier ->
+                CardFaceDisplay(cardFace = viewModel.rightStackTop?.front, modifier)
+            },
             modifier = modifier)
     }
 }
@@ -50,15 +73,11 @@ fun Stack(stack: List<Card>,
 @Composable
 fun StackLayout(
     flipCard: Card?,
-    leftStack: @Composable BoxScope.() -> Unit,
-    rightStack: @Composable BoxScope.() -> Unit,
+    leftStack: @Composable (modifier: Modifier) -> Unit,
+    rightStack: @Composable (modifier: Modifier) -> Unit,
     transitionTrigger: Int = 0,
     modifier: Modifier = Modifier
 ) {
-    val cardSpacing = with(LocalDensity.current) {
-        Dimen.Card.spacing.toPx()
-    }
-
     var offset by remember(transitionTrigger) { mutableStateOf(0f) }
     var flipRotation by remember(transitionTrigger) { mutableStateOf(0f) }
     val animationSpec = tween<Float>(1000, easing = CubicBezierEasing(0.4f, 0.0f, 0.8f, 0.8f))
@@ -78,29 +97,25 @@ fun StackLayout(
     Layout(
         modifier = modifier.fillMaxSize(),
         content = {
-            Box(modifier = Modifier
-                .layoutId("LeftStack"), content = leftStack)
-            Box(modifier = Modifier
-                .layoutId("RightStack"), content = rightStack)
+            leftStack(modifier = Modifier.layoutId("LeftStack"))
+            rightStack(modifier = Modifier.layoutId("RightStack"))
             flipCard?.let {
-                Box(modifier = Modifier
+                val modifier = Modifier
                     .layoutId("FlipCard")
                     .graphicsLayer {
                         rotationY = flipRotation
                         cameraDistance = 8 * density
                     }
-                , content = {
-                    if (flipRotation < 90f) {
-                        CardFaceDisplay(flipCard.back)
-                    } else {
-                        // Rotate the action card back again so it does not appear reversed
-                        CardFaceDisplay(flipCard.front,
-                            modifier = Modifier.graphicsLayer { 
-                                rotationY = 180f 
-                            }
-                        )
-                    }
-                })
+                if (flipRotation < 90f) {
+                    CardFaceDisplay(flipCard.back, modifier)
+                } else {
+                    // Rotate the action card back again so it does not appear reversed
+                    CardFaceDisplay(flipCard.front,
+                        modifier = modifier.graphicsLayer {
+                            rotationY = 180f
+                        }
+                    )
+                }
             }
         }) { measurables, constraints ->
 
@@ -112,20 +127,151 @@ fun StackLayout(
             measurables.firstOrNull { it.layoutId == "RightStack"} 
 
         layout(constraints.maxWidth, constraints.maxHeight) {
+            val cardSpacing = Dimen.Card.spacing.toPx()
             val cardWidth = ((constraints.maxWidth - cardSpacing) / 2).toInt()
-            val stackConstraints = constraints.copy(
+            val cardConstraints = constraints.copy(
                 minWidth = minOf(constraints.minWidth, cardWidth),
                 maxWidth = cardWidth
             )
 
-            val numberStackX = 0
-            val actionStackX = numberStackX + cardSpacing + cardWidth
-            val currentCardAnimatedX = actionStackX * offset
+            val leftStackX = 0
+            val rightStackX = leftStackX + cardSpacing + cardWidth
+            val flipCardX = rightStackX * offset
 
-            leftStackPlaceable?.measure(stackConstraints)?.place(numberStackX, 0)
-            rightStackPlaceable?.measure(stackConstraints)?.place(actionStackX.toInt(), 0)
-            flipCardPlaceable?.measure(stackConstraints)?.place(currentCardAnimatedX.toInt(), 0)
+            leftStackPlaceable?.measure(cardConstraints)?.place(leftStackX, 0)
+            rightStackPlaceable?.measure(cardConstraints)?.place(rightStackX.toInt(), 0)
+            flipCardPlaceable?.measure(cardConstraints)?.place(flipCardX.toInt(), 0)
         }
+    }
+}
+
+@Composable
+fun StackTranslateLayout(
+    flipCard: Card?,
+    leftStack: @Composable (modifier: Modifier) -> Unit,
+    rightStack: @Composable (modifier: Modifier) -> Unit,
+    transitionTrigger: Int = 0,
+    modifier: Modifier = Modifier
+) {
+    var offset by remember() { mutableStateOf(0f) }
+    val animationSpec = tween<Float>(1000, easing = CubicBezierEasing(0.4f, 0.0f, 0.8f, 0.8f))
+    
+    LaunchedEffect(key1 = transitionTrigger) {
+        // Translate card to right stack
+        animate(initialValue = 0f, targetValue = 1f, animationSpec = animationSpec) { value: Float, _: Float ->
+            offset = value
+        }
+    }
+
+    Layout(
+        modifier = modifier.fillMaxSize(),
+        content = {
+            leftStack(modifier = Modifier.layoutId("LeftStack"))
+            rightStack(modifier = Modifier.layoutId("RightStack"))
+            flipCard?.let {
+                CardFaceDisplay(flipCard.back, Modifier.layoutId("FlipCard"))
+            }
+        }) { measurables, constraints ->
+
+        val flipCardPlaceable =
+            measurables.firstOrNull { it.layoutId == "FlipCard" }
+        val leftStackPlaceable =
+            measurables.firstOrNull { it.layoutId == "LeftStack" }
+        val rightStackPlaceable =
+            measurables.firstOrNull { it.layoutId == "RightStack"}
+
+        layout(constraints.maxWidth, constraints.maxHeight) {
+            val cardSpacing = Dimen.Card.spacing.toPx()
+            val cardWidth = ((constraints.maxWidth - cardSpacing) / 2).toInt()
+            val cardConstraints = constraints.copy(
+                minWidth = minOf(constraints.minWidth, cardWidth),
+                maxWidth = cardWidth
+            )
+
+            val leftStackX = 0
+            val rightStackX = leftStackX + cardSpacing + cardWidth
+            val flipCardX = rightStackX * offset
+
+            leftStackPlaceable?.measure(cardConstraints)?.place(leftStackX, 0)
+            rightStackPlaceable?.measure(cardConstraints)?.place(rightStackX.toInt(), 0)
+            flipCardPlaceable?.measure(cardConstraints)?.place(flipCardX.toInt(), 0)
+        }
+    }
+}
+
+@Composable
+fun NonAnimatedStackLayout(
+    flipCard: Card?,
+    leftStack: @Composable (modifier: Modifier) -> Unit,
+    rightStack: @Composable (modifier: Modifier) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(horizontalArrangement = Arrangement.spacedBy(Dimen.Card.spacing), modifier = modifier) {
+        Box(modifier = Modifier.weight(1f)) {
+            leftStack
+            CardFaceDisplay(flipCard?.back)
+        }
+        rightStack(modifier = Modifier.weight(1f))
+    }
+}
+
+@Composable
+fun NonAnimatedCustomStackLayout(
+    flipCard: Card?,
+    leftStack: @Composable (modifier: Modifier) -> Unit,
+    rightStack: @Composable (modifier: Modifier) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Layout(
+        modifier = modifier.fillMaxSize(),
+        content = {
+            leftStack(modifier = Modifier.layoutId("LeftStack"))
+            rightStack(modifier = Modifier.layoutId("RightStack"))
+            flipCard?.let {
+                CardFaceDisplay(flipCard.back, modifier = Modifier.layoutId("FlipCard"))
+            }
+        }) { measurables, constraints ->
+
+        val flipCardPlaceable =
+            measurables.firstOrNull { it.layoutId == "FlipCard" }
+        val leftStackPlaceable =
+            measurables.firstOrNull { it.layoutId == "LeftStack" }
+        val rightStackPlaceable =
+            measurables.firstOrNull { it.layoutId == "RightStack"}
+
+        layout(constraints.maxWidth, constraints.maxHeight) {
+            val cardSpacing = Dimen.Card.spacing.toPx()
+            val cardWidth = ((constraints.maxWidth - cardSpacing) / 2).toInt()
+            val cardConstraints = constraints.copy(
+                minWidth = minOf(constraints.minWidth, cardWidth),
+                maxWidth = cardWidth
+            )
+
+            val leftStackX = 0
+            val rightStackX = leftStackX + cardSpacing + cardWidth
+            val flipCardX = leftStackX
+
+            leftStackPlaceable?.measure(cardConstraints)?.place(leftStackX, 0)
+            rightStackPlaceable?.measure(cardConstraints)?.place(rightStackX.toInt(), 0)
+            flipCardPlaceable?.measure(cardConstraints)?.place(flipCardX, 0)
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun NonAnimatedStackLayoutPreview() {
+    ExperimentsTheme {
+        NonAnimatedStackLayout(
+            flipCard = Card(CardFront(R.drawable.heart, Red, R.string.card_value_4)),
+            leftStack = { modifier ->
+                CardFaceDisplay(cardFace = CardBack, modifier)
+            }, rightStack = { modifier ->
+                CardFaceDisplay(cardFace = CardFront(R.drawable.club, Black, R.string.card_value_10), modifier)
+            },
+            modifier = Modifier
+                .height(400.dp)
+                .padding(Dimen.spacingDouble))
     }
 }
 
@@ -135,10 +281,10 @@ fun StackPreview() {
     ExperimentsTheme {
         StackLayout(
             flipCard = Card(CardFront(R.drawable.heart, Red, R.string.card_value_4)),
-            leftStack = {
-                CardFaceDisplay(cardFace = CardBack)
-            }, rightStack = {
-                CardFaceDisplay(cardFace = CardFront(R.drawable.club, Black, R.string.card_value_10))
+            leftStack = { modifier ->
+                CardFaceDisplay(cardFace = CardBack, modifier)
+            }, rightStack = { modifier ->
+                CardFaceDisplay(cardFace = CardFront(R.drawable.club, Black, R.string.card_value_10), modifier)
             },
             transitionTrigger = 4,
             modifier = Modifier

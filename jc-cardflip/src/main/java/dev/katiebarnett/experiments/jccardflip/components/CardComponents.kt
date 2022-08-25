@@ -34,8 +34,7 @@ fun CardFaceDisplay(
     modifier: Modifier = Modifier
 ) {
     if (cardFace != null) {
-        Box(
-            contentAlignment = Alignment.Center,
+        Box(contentAlignment = Alignment.Center,
             modifier = modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(Dimen.Card.radius))

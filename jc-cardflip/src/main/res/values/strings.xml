@@ -10,20 +10,19 @@
     <string name="empty_stack">Empty Stack</string>
 
 
-    <string name="card_value_1">1</string>
-    <string name="card_value_2">1</string>
-    <string name="card_value_3">1</string>
-    <string name="card_value_4">1</string>
-    <string name="card_value_5">1</string>
-    <string name="card_value_6">1</string>
-    <string name="card_value_7">1</string>
-    <string name="card_value_8">1</string>
-    <string name="card_value_9">1</string>
-    <string name="card_value_10">1</string>
+    <string name="card_value_A">A</string>
+    <string name="card_value_2">2</string>
+    <string name="card_value_3">3</string>
+    <string name="card_value_4">4</string>
+    <string name="card_value_5">5</string>
+    <string name="card_value_6">6</string>
+    <string name="card_value_7">7</string>
+    <string name="card_value_8">8</string>
+    <string name="card_value_9">9</string>
+    <string name="card_value_10">10</string>
     <string name="card_value_J">J</string>
     <string name="card_value_Q">Q</string>
     <string name="card_value_K">K</string>
-    <string name="card_value_A">A</string>
     
     
 </resources>

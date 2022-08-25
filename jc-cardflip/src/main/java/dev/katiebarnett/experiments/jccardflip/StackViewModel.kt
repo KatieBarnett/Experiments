@@ -8,23 +8,23 @@ import javax.inject.Inject
 @HiltViewModel
 class StackViewModel @Inject constructor() : ViewModel() {
     
-    private lateinit var stack: List<Card>
+    private lateinit var deck: List<Card>
     private var position: Int = 0
     
     val leftStackTop
-        get() = stack.getOrNull(position + 1)
+        get() = deck.getOrNull(position + 1)
     
     val rightStackTop
-        get() = stack.getOrNull(position - 1)
+        get() = deck.getOrNull(position - 1)
 
     val flipCard
-        get() = stack.getOrNull(position)
+        get() = deck.getOrNull(position)
 
     fun setPosition(newPosition: Int) {
         position = newPosition
     }
 
-    fun setStack(newStack: List<Card>) {
-        stack = newStack
+    fun setDeck(newDeck: List<Card>) {
+        deck = newDeck
     }
 }
