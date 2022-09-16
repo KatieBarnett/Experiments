@@ -14,14 +14,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 
-class FakeApi(): Api {
-    
-    override suspend fun getCyberImplants(): List<CyberImplant> {
-        return listOf<CyberImplant>(CyberImplant("test1"))
-    }
-
-}
-
 class CyberImplantListViewModelTests {
     
     @get:Rule
