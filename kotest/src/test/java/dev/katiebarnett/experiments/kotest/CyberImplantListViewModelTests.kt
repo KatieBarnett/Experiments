@@ -16,7 +16,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 
 class FakeApi(): Api {
     
-    override fun getCyberImplants(): List<CyberImplant> {
+    override suspend fun getCyberImplants(): List<CyberImplant> {
         return listOf<CyberImplant>(CyberImplant("test1"))
     }
 
@@ -26,6 +26,9 @@ class CyberImplantListViewModelTests {
     
     @get:Rule
     val instantTaskRule = InstantTaskExecutorRule()
+
+    @get:Rule
+    val coroutinesDispatcherRule = CoroutineDispatcherRule()
 
     val api = FakeApi() // FakeApi with canned responses
     val viewModel = CyberImplantListViewModel(api)
