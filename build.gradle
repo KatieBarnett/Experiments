@@ -14,7 +14,7 @@ buildscript {
         
         // For Apollo Graphql tutorial
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:"
 //        classpath "org.owasp:dependency-check-gradle:$dependency_check_version"
     }
 }

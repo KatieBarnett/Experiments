@@ -20,10 +20,13 @@ interface Api {
 class CyberImplantListViewModel(val api: Api): ViewModel() {
 
     val data = MutableLiveData<List<CyberImplant>>()
+    
+    var staticData = listOf<CyberImplant>()
 
     fun loadData() {
         viewModelScope.launch {
-            data.value = api.getCyberImplants()
+//            data.value = api.getCyberImplants()
+            staticData = api.getCyberImplants()
         }
     }
 }

@@ -28,8 +28,6 @@ class CyberImplantListViewModelTests {
     @Test
     fun `when loadData() is called, should load data`() {
         viewModel.loadData()
-        assertTrue(viewModel.data.value is List<CyberImplant>)
-        assertTrue(viewModel.data.value?.size == 1)
         assertEquals(CyberImplant("test1"), viewModel.data.value?.get(0))
     }
 }
