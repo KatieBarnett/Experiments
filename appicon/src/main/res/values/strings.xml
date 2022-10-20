@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Experiments</string>
+    <string name="app_name_dark">Dark Experiments</string>
 </resources>
