@@ -34,7 +34,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
 dependencies {
     implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.core:core-ktx:$ext.kotlin_version")
+    implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
