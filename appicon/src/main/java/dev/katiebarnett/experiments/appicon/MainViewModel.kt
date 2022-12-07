@@ -3,6 +3,7 @@ package dev.katiebarnett.experiments.appicon
 import android.content.ComponentName
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
