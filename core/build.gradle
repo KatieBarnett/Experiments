@@ -36,5 +36,6 @@ android {
 }
 
 dependencies {
+    implementation platform(jetpackComposeBom)
     implementation jetpackComposeLibs
 }

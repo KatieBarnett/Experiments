@@ -52,6 +52,7 @@ dependencies {
 
     implementation coreLibs
     implementation uiLibs
+    implementation platform(jetpackComposeBom)
     implementation jetpackComposeLibs
     debugImplementation jetpackComposeLibsDebug
     implementation lifecycleLibs

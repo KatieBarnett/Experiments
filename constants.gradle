@@ -23,4 +23,6 @@ ext {
     material_version = '1.5.0'
     protobuf_version = '3.18.0'
     protobuf_plugin_version = '0.8.17'
+
+    compose_bom_version = '2022.11.00'
 }

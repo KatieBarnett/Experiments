@@ -17,19 +17,22 @@ ext {
             "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     ]
 
+    jetpackComposeBom = "androidx.compose:compose-bom:$compose_bom_version"
+
     jetpackComposeLibs = [
             // Integration with activities
-            "androidx.activity:activity-compose:$compose_activity_version",
+            "androidx.activity:activity-compose",
             // Compose Material Design
-            "androidx.compose.material3:material3:$compose_material_version",
-            "androidx.compose.ui:ui:$compose_version",
+            "androidx.compose.material3:material3",
+            "androidx.compose.material:material",
+            "androidx.compose.ui:ui",
             // Animations
-            "androidx.compose.animation:animation:$compose_version",
+            "androidx.compose.animation:animation",
             // Tooling support (Previews, etc.)
-            "androidx.compose.ui:ui-tooling-preview:$compose_version",
+            "androidx.compose.ui:ui-tooling-preview",
             // Integration with ViewModels
             "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_viewmodel_version",
-            "androidx.compose.runtime:runtime-livedata:$compose_version",
+            "androidx.compose.runtime:runtime-livedata",
             // Navigation
             "androidx.navigation:navigation-compose:$compose_navigation_version",
             "androidx.hilt:hilt-navigation-compose:$hilt_androidx_version",
