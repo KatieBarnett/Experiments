@@ -3,6 +3,8 @@
 
     <string name="title">Hello Top App Bar!</string>
 
+    <string name="empty_list_text">There are no items in the list!</string>
+
     <string name="item_text">Item %s</string>
 
     <string name="navigate_back">Back</string>
