@@ -26,8 +26,8 @@ plugins {
     id "com.github.ben-manes.versions" version '0.42.0'
     id 'com.autonomousapps.dependency-analysis' version '1.10.0'
     id 'org.owasp.dependencycheck' version "$dependency_check_version"
+    id 'org.jetbrains.kotlin.plugin.serialization' version "$kotlin_version"
 }
-
 
 dependencyAnalysis {
     issues {

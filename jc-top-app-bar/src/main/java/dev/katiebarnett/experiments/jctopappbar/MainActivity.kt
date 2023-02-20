@@ -42,7 +42,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            val viewModel = hiltViewModel<MainViewModel>()
             val navController = rememberNavController()
             ExperimentsTheme {
                 Surface(

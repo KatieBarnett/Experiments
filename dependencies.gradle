@@ -24,13 +24,15 @@ ext {
             "androidx.activity:activity-compose",
             // Compose Material Design
             "androidx.compose.material3:material3",
-            "androidx.compose.material:material",
+//            "androidx.compose.material:material",
+            "androidx.compose.material:material:1.4.0-beta01",
             "androidx.compose.ui:ui",
             // Animations
             "androidx.compose.animation:animation",
             // Tooling support (Previews, etc.)
             "androidx.compose.ui:ui-tooling-preview",
             // Integration with ViewModels
+//            "androidx.lifecycle.lifecycle-runtime-compose:$compose_lifecycle_runtime_version",
             "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_viewmodel_version",
             "androidx.compose.runtime:runtime-livedata",
             // Navigation
@@ -48,6 +50,19 @@ ext {
     dataStoreLibs = [
             "androidx.datastore:datastore:$datastore_version",
             "com.google.protobuf:protobuf-javalite:$protobuf_version"
+    ]
+
+    imageLibs = [
+        "io.coil-kt:coil-compose:$coil_version"
+    ]
+
+    networkLibs = [
+        "com.squareup.retrofit2:retrofit:$retrofit_version",
+        "org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlin_serialization_version"
+    ]
+
+    coroutinesLibs = [
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     ]
 
     coreLibsKapt = [
