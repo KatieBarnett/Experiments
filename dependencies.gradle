@@ -24,9 +24,9 @@ ext {
             "androidx.activity:activity-compose",
             // Compose Material Design
             "androidx.compose.material3:material3",
-//            "androidx.compose.material:material",
-            "androidx.compose.material:material:1.4.0-beta01",
-            "androidx.compose.ui:ui",
+            "androidx.compose.material:material",
+//            "androidx.compose.material:material:1.4.0-beta01",
+            "androidx.compose.ui:ui-tooling-preview",
             // Animations
             "androidx.compose.animation:animation",
             // Tooling support (Previews, etc.)
@@ -42,9 +42,16 @@ ext {
             "androidx.constraintlayout:constraintlayout-compose:$compose_constraint_layout_version"
     ]
 
+    accompanistPager = [
+        "com.google.accompanist:accompanist-pager:$accompanist_version",
+        "com.google.accompanist:accompanist-pager-indicators:$accompanist_version"
+    ]
+
     jetpackComposeLibsDebug = [
             // Tooling support (Previews, etc.)
-            "androidx.compose.ui:ui-tooling:$compose_version"
+            "androidx.compose.ui:ui-tooling",
+            "androidx.customview:customview:$composeCustomViewVersion",
+            "androidx.customview:customview-poolingcontainer:$composePoolingVersion",
     ]
 
     dataStoreLibs = [

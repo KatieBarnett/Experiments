@@ -48,8 +48,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CollapsingTopAppBarNoStylingScreen(navController)
-//                    CollapsingTopAppBarScreen(navController)
+//                    CollapsingTopAppBarNoStylingScreen(navController)
+                    CollapsingTopAppBarScreen(navController)
 //                    SingleItemCollapsingTopAppBarScreen(navController)
 //                    PinnedTopAppBarScreen(navController)
 //                    FixedTopAppBarScreen(navController)

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Jetpack Compose Scroll State</string>
+    <string name="title_lazy_column">Scrolled Amount: %1$dpx, Index: %2$dx, Item scroll: %3$dpx</string>
+    <string name="sub_title_lazy_column">Lazy Column</string>
+    <string name="title_column">Scrolled Amount: %1$dpx</string>
+    <string name="sub_title_column">Column</string>
+</resources>
