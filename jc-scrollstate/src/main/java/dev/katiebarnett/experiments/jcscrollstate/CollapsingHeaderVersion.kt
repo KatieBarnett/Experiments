@@ -198,7 +198,7 @@ fun CollapsingHeaderVersion() {
 
 //            Box(
 //                Modifier.fillMaxWidth()
-//                    .background(Color.Gray)
+//                    .background(Color.Grey)
 //                    .height(headerHeightNewDp)
 //                    .align(Alignment.TopCenter)) {
 //

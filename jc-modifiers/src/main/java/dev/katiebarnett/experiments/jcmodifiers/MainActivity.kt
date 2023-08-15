@@ -22,10 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.katiebarnett.experiments.core.theme.ExperimentsTheme
-import dev.katiebarnett.experiments.jcmodifiers.components.ComplexModifierScene
-import dev.katiebarnett.experiments.jcmodifiers.components.FirstSimplificationModifier
 import dev.katiebarnett.experiments.jcmodifiers.components.StateButtons
-import kotlin.math.max
+import dev.katiebarnett.experiments.jcmodifiers.examples.ComplexModifierScene
+import dev.katiebarnett.experiments.jcmodifiers.examples.FirstSimplificationModifier
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +65,7 @@ fun MainContent() {
             FirstSimplificationModifier(nighttime, torchon, modifier = sceneModifier)
 //        ConditionalModifierFirst(nighttime, torchon, modifier = sceneModifier)
 //            ConditionalModifierSecond(nighttime, torchon, modifier = sceneModifier)
-//            NullConditionalModifier(nighttime, torchon, backgroundColor = Color.Gray, modifier = sceneModifier)
+//            NullConditionalModifier(nighttime, torchon, backgroundColor = Color.Grey, modifier = sceneModifier)
         }
     }
 }
