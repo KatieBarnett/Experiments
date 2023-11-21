@@ -11,14 +11,13 @@ import kotlin.random.Random
 class MainViewModel @Inject constructor() : ViewModel() {
 
     lateinit var cardStack: List<Card>
-    
+
     private val _position = MutableLiveData(0)
     val position: LiveData<Int> = _position
 
-    val advancePositionEnabled = Transformations.map(position) {
-        cardStack.size > it + 1
-    }
-    
+    val cardStackSize: Int
+        get() = cardStack.size
+
     fun advancePosition() {
         val newPosition = (_position.value ?: 0) + 1
         _position.postValue(newPosition)

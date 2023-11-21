@@ -4,9 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Chip
-import androidx.compose.material.ChipDefaults
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Button
@@ -21,6 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material.Chip
+import androidx.wear.compose.material.ChipDefaults
 import dev.katiebarnett.experiments.core.theme.ExperimentsTheme
 
 // Standard preview parameters
@@ -178,7 +177,6 @@ fun ButtonComponent(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ChipComponent(
     background: Color,
@@ -191,8 +189,10 @@ fun ChipComponent(
         backgroundColor = background,
         contentColor = contentColor,
     )
+    val chipBorder = ChipDefaults.chipBorder()
     Chip(
         colors = chipColors,
+        border = chipBorder,
         onClick = onClick,
         modifier = modifier
     ) {

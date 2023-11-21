@@ -30,9 +30,9 @@ inline fun Modifier.conditional(
     ifTrue: Modifier.() -> Modifier,
     ifFalse: Modifier.() -> Modifier = { this },
 ): Modifier = if (condition) {
-    then(ifTrue(this))
+    then(ifTrue(Modifier))
 } else {
-    then(ifFalse(this))
+    then(ifFalse(Modifier))
 }
 
 // This is better using inline

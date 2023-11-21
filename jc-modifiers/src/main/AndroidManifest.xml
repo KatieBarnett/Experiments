@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Experiments">
         <activity
-            android:name="dev.katiebarnett.experiments.jcmodifiers.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Experiments">
