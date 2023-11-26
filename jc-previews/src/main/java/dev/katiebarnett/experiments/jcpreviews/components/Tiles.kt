@@ -41,7 +41,7 @@ import dev.katiebarnett.experiments.core.theme.ExperimentsTheme
 fun TileSideImage(
     image: Bitmap,
     contentDescription: String,
-    background: Color,
+    background: Color = MaterialTheme.colorScheme.primary,
     contentColor: Color = MaterialTheme.colorScheme.onPrimary,
     modifier: Modifier = Modifier,
 ) {
@@ -61,7 +61,7 @@ fun TileSideDetails(
     name: String,
     description: String?,
     icon: ImageVector,
-    background: Color,
+    background: Color = MaterialTheme.colorScheme.primary,
     contentColor: Color = MaterialTheme.colorScheme.onPrimary,
     modifier: Modifier = Modifier,
 ) {
@@ -94,8 +94,7 @@ fun TileSideDetails(
                     text = name,
                     color = contentColor,
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.displayLarge,
-                    modifier = modifier
+                    style = MaterialTheme.typography.displayLarge
                 )
             }
             description?.let {
@@ -107,47 +106,12 @@ fun TileSideDetails(
                         text = description,
                         color = contentColor,
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.displayMedium,
-                        modifier = modifier
+                        style = MaterialTheme.typography.displayMedium
                     )
                 }
             }
         }
     }
-}
-
-@Composable
-fun Tile(
-    name: String,
-    description: String?,
-    icon: ImageVector,
-    image: Bitmap,
-    background: Color = MaterialTheme.colorScheme.primary,
-    contentColor: Color = MaterialTheme.colorScheme.onPrimary,
-    modifier: Modifier = Modifier,
-) {
-    Tile(
-        sideFront = { modifier ->
-            TileSideDetails(
-                name = name,
-                description = description,
-                icon = icon,
-                background = background,
-                contentColor = contentColor,
-                modifier = modifier
-            )
-        },
-        sideBack = { modifier ->
-            TileSideImage(
-                image = image,
-                contentDescription = description.orEmpty(),
-                background = background,
-                contentColor = contentColor,
-                modifier = modifier
-            )
-        },
-        modifier = modifier,
-    )
 }
 
 @Composable
@@ -210,9 +174,11 @@ fun Tile(
 @Composable
 fun TilePreview() {
     ExperimentsTheme {
-//        Tile(
-//            qrCodeItem = sampleQRCodeItem,
-//            modifier = Modifier,
-//        )
+        Tile(
+            TileSideDetails(
+                name = ""
+            ),
+            TileSideImage(),
+        )
     }
 }
