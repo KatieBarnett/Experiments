@@ -59,6 +59,7 @@ dependencies {
     debugImplementation(libs.bundles.jetpackComposeLibsDebug)
     implementation(libs.bundles.lifecycleLibs)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.navigation)
 
     ksp(libs.hilt.compiler)
 }
