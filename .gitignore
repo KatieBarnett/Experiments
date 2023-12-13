@@ -90,3 +90,4 @@ lint/tmp/
 .idea/*
 
 *DS_Store
+appicon/.DS_Store
