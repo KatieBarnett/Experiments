@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.bundles.lifecycleLibs)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.navigation)
+    implementation(libs.accompanist.systemuicontroller)
 
     ksp(libs.hilt.compiler)
 }

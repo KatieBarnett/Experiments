@@ -170,15 +170,15 @@ fun Tile(
     }
 }
 
-@Preview
-@Composable
-fun TilePreview() {
-    ExperimentsTheme {
-        Tile(
-            TileSideDetails(
-                name = ""
-            ),
-            TileSideImage(),
-        )
-    }
-}
+//@Preview
+//@Composable
+//fun TilePreview() {
+//    ExperimentsTheme {
+//        Tile(
+//            TileSideDetails(
+//                name = ""
+//            ),
+//            TileSideImage(),
+//        )
+//    }
+//}
