@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Jetpack Compose ModalBottomSheet</string>
+
+    <string name="app_bar">Shopping List</string>
+    <string name="add_new">Add new item</string>
+    <string name="add_new_save">Save</string>
+    <string name="add_new_hint">Item to add...</string>
+    <string name="validation_message_item">Item is required</string>
+    <string name="confirm_changes_title">Are you sure?</string>
+    <string name="confirm_changes_text">Your changes have not been saved</string>
+    <string name="confirm_changes_confirm">Yes</string>
+    <string name="confirm_changes_dismiss">Cancel</string>
+</resources>
