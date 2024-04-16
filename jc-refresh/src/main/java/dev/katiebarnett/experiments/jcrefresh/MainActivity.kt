@@ -34,9 +34,11 @@ import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import dagger.hilt.android.AndroidEntryPoint
 import dev.katiebarnett.experiments.core.theme.ExperimentsTheme
 import dev.katiebarnett.experiments.jcrefresh.model.Fox
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
