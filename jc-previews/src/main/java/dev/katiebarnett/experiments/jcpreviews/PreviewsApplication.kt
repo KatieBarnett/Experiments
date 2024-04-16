@@ -1,7 +1,7 @@
-package dev.katiebarnett.experiments.jcrefresh
+package dev.katiebarnett.experiments.jcpreviews
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class RefreshApplication : Application()
+class PreviewsApplication : Application()

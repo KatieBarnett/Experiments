@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.dagger.hilt.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -57,8 +58,15 @@ dependencies {
     implementation(libs.bundles.uiLibs)
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.jetpackComposeLibs)
+    implementation(libs.firebase.common.ktx)
     debugImplementation(libs.bundles.jetpackComposeLibsDebug)
     implementation(libs.bundles.lifecycleLibs)
+    implementation(libs.hilt.navigation.compose)
+
+    implementation(libs.coil)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 
     ksp(libs.hilt.compiler)
 }
