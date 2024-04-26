@@ -51,6 +51,7 @@ fun ImageComponent() {
     ) {
         val imageUrl = "https://img.goodfon.com/original/800x600/e/12/voda-more-aysberg-nebo.jpg"
         if (LocalInspectionMode.current) {
+            // Show this image from the resources rather than loading an image from the internet
             Image(
                 painter = painterResource(id = R.drawable.iceberg_preview),
                 contentDescription = null,
@@ -58,7 +59,7 @@ fun ImageComponent() {
                 modifier = Modifier.fillMaxWidth()
             )
         } else {
-            // Show this text in the app:
+            // Show this image in the live version
             AsyncImage(
                 model = imageUrl,
                 contentDescription = null,
@@ -72,6 +73,7 @@ fun ImageComponent() {
 @Composable
 fun AnalyticsComponent() {
     if (!LocalInspectionMode.current) {
+        // Firebase is not initialised in Previews and will cause an error
         Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, Bundle())
     }
     Column(modifier = Modifier.padding(16.dp)) {
@@ -85,6 +87,9 @@ fun ViewModelComponent() {
     val list: List<String> = if (!LocalInspectionMode.current) {
         viewModel.someViewModelFlow.collectAsState(initial = emptyList()).value
     } else {
+        // For Previews, we want to show the flow in a different state
+        // In this case, it would be better to create a composable from the actual content
+        // (the Row below) and pass in a list
         listOf("d", "e", "f")
     }
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(16.dp)) {
@@ -97,7 +102,7 @@ fun ViewModelComponent() {
 
 @Composable
 fun ExampleScreen() {
-    Column {
+    Column() {
         TextComponent()
         ImageComponent()
         AnalyticsComponent()

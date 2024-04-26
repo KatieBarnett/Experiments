@@ -1,7 +1,7 @@
 [versions]
 accompanist = '0.29.1-alpha'
 activity-compose = "1.8.2"
-agp = "8.5.0-alpha02"
+agp = "8.5.0-alpha06"
 androidx-test-ext-junit = "1.1.5"
 appcompat = "1.6.1"
 codeScanner = "16.1.0"
@@ -16,9 +16,9 @@ core-ktx = "1.12.0"
 core-splashscreen = "1.0.1"
 coroutines = "1.7.1"
 datastore = "1.0.0"
-firebase-bom = "32.8.1"
+firebaseBom = "32.8.1"
 googleServicesPlugin = "4.4.1"
-hilt = "2.49"
+hilt = "2.48"
 hiltAndroidx = "1.2.0"
 junit = "4.13.2"
 kotlin = "1.9.22"
@@ -28,7 +28,7 @@ kspPlugin = "1.9.10-1.0.13"
 lifecycle = "2.7.0"
 lifecycleRuntimeCompose = "2.7.0"
 material = "1.11.0"
-material3 = "1.2.1"
+material3 = "1.2.0"
 navigation = "2.7.7"
 protobuf = "3.24.3"
 protobufPlugin = "0.9.4"
@@ -36,7 +36,6 @@ qrgenerator = "1.0.1"
 retrofit = "2.9.0"
 retrofit2-serialization-converter = "0.8.0"
 timber = "5.0.1"
-firebaseCommonKtx = "20.4.3"
 
 [libraries]
 accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist" }
@@ -61,8 +60,9 @@ core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx
 core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "core-splashscreen" }
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-common-ktx = { group = "com.google.firebase", name = "firebase-common-ktx" }
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltAndroidx" }
@@ -83,7 +83,7 @@ qrgenerator = { group = "com.github.androidmads", name = "QRGenerator", version.
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2-serialization-converter" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
-firebase-common-ktx = { group = "com.google.firebase", name = "firebase-common-ktx", version.ref = "firebaseCommonKtx" }
+
 
 [bundles]
 accompianistPager = ["accompanist-pager", "accompanist-pager-indicators"]
