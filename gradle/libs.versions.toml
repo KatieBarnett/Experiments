@@ -35,6 +35,7 @@ protobufPlugin = "0.9.4"
 qrgenerator = "1.0.1"
 retrofit = "2.9.0"
 retrofit2-serialization-converter = "0.8.0"
+screenshot = "0.0.1-alpha01"
 timber = "5.0.1"
 
 [libraries]
@@ -105,3 +106,4 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 safeArgs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
+screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"}

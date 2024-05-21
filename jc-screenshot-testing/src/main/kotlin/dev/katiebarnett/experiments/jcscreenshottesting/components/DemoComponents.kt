@@ -16,12 +16,12 @@ import androidx.compose.ui.unit.dp
 import dev.katiebarnett.experiments.jcscreenshottesting.R
 
 @Composable
-fun TextComponent() {
+fun TextComponent(previewType: String) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.padding(16.dp)
     ) {
-        Text("Hello world!")
+        Text("Hello world! - $previewType")
     }
 }
 
@@ -36,17 +36,17 @@ fun ImageComponent() {
 }
 
 @Composable
-fun ExampleScreen() {
+fun ExampleScreen(previewType: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         ImageComponent()
-        TextComponent()
+        TextComponent(previewType)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun TextComponentPreview() {
-    TextComponent()
+    TextComponent("In File")
 }
 
 @Preview(showBackground = true)
@@ -58,5 +58,5 @@ fun ImageComponentPreview() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ExampleScreenPreview() {
-    ExampleScreen()
+    ExampleScreen("In File")
 }

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.screenshot)
 }
 
 android {
@@ -45,6 +46,7 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+        experimentalProperties["android.experimental.enableScreenshotTest"] = true
     }
 }
 
@@ -61,4 +63,5 @@ dependencies {
 
     implementation(libs.coil)
 
+    screenshotTestImplementation(libs.compose.ui.tooling)
 }

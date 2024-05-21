@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainContent() {
-    ExampleScreen()
+    ExampleScreen("Main Activity")
 }
 
 @Composable
