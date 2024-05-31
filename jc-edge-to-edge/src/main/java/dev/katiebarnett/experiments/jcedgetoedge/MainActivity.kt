@@ -135,6 +135,8 @@ class MainActivity : ComponentActivity() {
                                 val attributes = WindowManager.LayoutParams()
                                 attributes.copyFrom(activityWindow.attributes)
                                 attributes.type = dialogWindow.attributes.type
+                                attributes.dimAmount = dialogWindow.attributes.dimAmount
+                                attributes.flags = dialogWindow.attributes.flags
                                 dialogWindow.attributes = attributes
                                 parentView.layoutParams = LayoutParams(
                                     activityWindow.decorView.width,
