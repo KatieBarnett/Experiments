@@ -1,8 +1,8 @@
-import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
+    alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.androidLibrary) apply false
@@ -16,8 +16,8 @@ plugins {
 ext {
     extra["appVersionName"] = "1.0.0"
     extra["appVersionCode"] = 1
-    extra["compileSdk"] = 34
-    extra["targetSdk"] = 34
+    extra["compileSdk"] = 36
+    extra["targetSdk"] = 36
     extra["minSdk"] = 26
     extra["wearMinSdk"] = 30
 }
