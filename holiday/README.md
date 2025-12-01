@@ -1,6 +1,5 @@
-# App Icon Experiments
-- Programatically changing app icons demo
-- Themed app icons demo
+# Holiday Theme Experiments
+- Programatically changing app icon & splash screen demo for holiday times
 
 ## Resources
 
@@ -10,4 +9,4 @@
 - Figma asset template: https://www.figma.com/community/file/1131374111452281708
 
 ### Icons
-- Icons from https://fonts.google.com/ & (badly) edited by me.
+- Icons from https://fonts.google.com/ & (badly) edited by me.[build.gradle.kts](build.gradle.kts)[README.md](../jc-lottie/README.md)
