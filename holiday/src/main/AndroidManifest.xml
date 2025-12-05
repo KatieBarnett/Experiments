@@ -14,7 +14,7 @@
         <activity
             android:name="dev.katiebarnett.experiments.holiday.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Experiments">
+            android:theme="@style/Theme.Experiments.Splash">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

@@ -1,7 +1,7 @@
 package dev.katiebarnett.experiments.appicon
 
 import android.content.ComponentName
-import android.content.SharedPreferences
+import android.content.DataStore
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 open class MainViewModel @Inject constructor(
-    private val sharedPreferences: SharedPreferences
+    private val DataStore: DataStore
 ) : ViewModel(), DefaultLifecycleObserver {
 
     enum class IconStatus {
@@ -26,7 +26,7 @@ open class MainViewModel @Inject constructor(
     }
 
     val darkModeIcon = MutableLiveData(IconStatus.valueOf(
-        sharedPreferences.getString(ICON_STATUS_PREF_KEY, DEFAULT.name) ?: DEFAULT.name)
+        DataStore.getString(ICON_STATUS_PREF_KEY, DEFAULT.name) ?: DEFAULT.name)
     )
 
     fun setDarkModeIcon(packageManager: PackageManager, darkMode: Boolean) {
@@ -35,7 +35,7 @@ open class MainViewModel @Inject constructor(
         } else {
             DEFAULT
         }
-        sharedPreferences.edit().putString(ICON_STATUS_PREF_KEY, newStatus.name).apply()
+        DataStore.edit().putString(ICON_STATUS_PREF_KEY, newStatus.name).apply()
         darkModeIcon.postValue(newStatus)
         updateAppIcon(packageManager, newStatus)
     }

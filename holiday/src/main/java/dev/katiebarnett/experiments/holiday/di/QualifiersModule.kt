@@ -8,29 +8,29 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class FeatureFlagSharedPreferencesFileNameKey
+annotation class FeatureFlagDataStoreFileNameKey
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class FeatureFlagSharedPreferences
+annotation class FeatureFlagDataStore
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class AppSharedPreferencesFileNameKey
+annotation class AppDataStoreFileNameKey
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class AppSharedPreferences
+annotation class AppDataStore
 
 @Module
 @InstallIn(SingletonComponent::class)
 object QualifiersModule {
 
     @Provides
-    @FeatureFlagSharedPreferencesFileNameKey
-    fun provideFeatureFlagSharedPreferencesFileNameKey() = "feature_flags"
+    @FeatureFlagDataStoreFileNameKey
+    fun provideFeatureFlagDataStoreFileNameKey() = "feature_flags"
 
     @Provides
-    @AppSharedPreferencesFileNameKey
-    fun provideAppSharedPreferencesFileNameKey() = "app_shared_preferences"
+    @AppDataStoreFileNameKey
+    fun provideAppDataStoreFileNameKey() = "app_shared_preferences"
 }

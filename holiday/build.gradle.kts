@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.splashscreen)
     implementation(libs.timber)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.datastore.preferences)
 
 
     ksp(libs.hilt.compiler)

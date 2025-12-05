@@ -1,7 +1,13 @@
 package dev.katiebarnett.experiments.holiday.di
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
+import androidx.datastore.preferences.SharedPreferencesMigration
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.preferencesDataStoreFile
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -9,6 +15,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.katiebarnett.experiments.holiday.toggles.RocketFlagService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit.Builder
@@ -27,19 +36,28 @@ class RocketFlagModule {
     fun provideRocketFlagService(@ApplicationContext context: Context): RocketFlagService {
         return Builder()
             .baseUrl(SERVICE_URL)
-            .addConverterFactory(Json {
-                ignoreUnknownKeys = true
-            }.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(
+                Json {
+                    ignoreUnknownKeys = true
+                }.asConverterFactory("application/json".toMediaType())
+            )
             .build().create(RocketFlagService::class.java)
     }
 
-    @Singleton
     @Provides
-    @FeatureFlagSharedPreferences
-    fun provideFeatureFlagSharedPreferences(
-        @ApplicationContext context: Context,
-        @FeatureFlagSharedPreferencesFileNameKey featureFlagSharedPreferencesKey: String,
-    ): SharedPreferences {
-        return context.getSharedPreferences(featureFlagSharedPreferencesKey, Context.MODE_PRIVATE)
+    @Singleton
+    @FeatureFlagDataStore
+    fun providePreferencesDataStore(
+        @ApplicationContext appContext: Context,
+        @FeatureFlagDataStoreFileNameKey featureFlagDataStoreKey: String,
+    ): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create(
+            corruptionHandler = ReplaceFileCorruptionHandler(
+                produceNewData = { emptyPreferences() }
+            ),
+            migrations = listOf(SharedPreferencesMigration(appContext, featureFlagDataStoreKey)),
+            scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+            produceFile = { appContext.preferencesDataStoreFile(featureFlagDataStoreKey) }
+        )
     }
 }

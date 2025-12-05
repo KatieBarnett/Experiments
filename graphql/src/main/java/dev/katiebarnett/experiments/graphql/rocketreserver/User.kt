@@ -1,23 +1,23 @@
 package dev.katiebarnett.experiments.graphql.rocketreserver
 
 import android.content.Context
-import android.content.SharedPreferences
-import androidx.security.crypto.EncryptedSharedPreferences
+import android.content.DataStore
+import androidx.security.crypto.EncryptedDataStore
 import androidx.security.crypto.MasterKeys
 
 object User {
     private const val KEY_TOKEN = "TOKEN"
-    private fun preferences(context: Context): SharedPreferences {
+    private fun preferences(context: Context): DataStore {
         val masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
-        val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
+        val DataStore: DataStore = EncryptedDataStore.create(
             "secret_shared_prefs",
             masterKeyAlias,
             context,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            EncryptedDataStore.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedDataStore.PrefValueEncryptionScheme.AES256_GCM
         )
-        return sharedPreferences
+        return DataStore
     }
 
     fun getToken(context: Context): String? {

@@ -5,18 +5,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.katiebarnett.experiments.holiday.toggles.FeatureFlagManager
+import dev.katiebarnett.experiments.holiday.toggles.FeatureFlagManager.Companion.FLAG_ENABLE_CHRISTMAS_THEME
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 open class MainViewModel @Inject constructor(
     private val featureFlagManager: FeatureFlagManager,
-) : ViewModel(), DefaultLifecycleObserver {
-
+) : ViewModel() {
 
     companion object {
         private const val ICON_STATUS_PREF_KEY = "ICON_STATUS"
     }
+
+    // For debugging and display
+    val featureFlagFlow = featureFlagManager.featureFlagFlow
+
 
     init {
         fetchFeatureFlags()
@@ -30,7 +35,7 @@ open class MainViewModel @Inject constructor(
 
 //    val darkModeIcon = MutableLiveData(
 //        AppIconManager.IconStatus.valueOf(
-//        sharedPreferences.getString(ICON_STATUS_PREF_KEY, DEFAULT.name) ?: DEFAULT.name)
+//        DataStore.getString(ICON_STATUS_PREF_KEY, DEFAULT.name) ?: DEFAULT.name)
 //    )
 //
 //    fun setDarkModeIcon(packageManager: PackageManager, darkMode: Boolean) {
@@ -39,10 +44,8 @@ open class MainViewModel @Inject constructor(
 //        } else {
 //            DEFAULT
 //        }
-//        sharedPreferences.edit().putString(ICON_STATUS_PREF_KEY, newStatus.name).apply()
+//        DataStore.edit().putString(ICON_STATUS_PREF_KEY, newStatus.name).apply()
 //        darkModeIcon.postValue(newStatus)
 //        updateAppIcon(packageManager, newStatus)
 //    }
-
-
 }

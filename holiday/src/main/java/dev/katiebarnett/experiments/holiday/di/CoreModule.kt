@@ -1,12 +1,21 @@
 package dev.katiebarnett.experiments.holiday.di
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
+import androidx.datastore.preferences.SharedPreferencesMigration
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.preferencesDataStoreFile
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
 @Module
@@ -19,13 +28,20 @@ class CoreModule {
         return context
     }
 
-    @Singleton
     @Provides
-    @AppSharedPreferences
-    fun provideAppSharedPreferences(
-        @ApplicationContext context: Context,
-        @AppSharedPreferencesFileNameKey appSharedPreferencesKey: String,
-    ): SharedPreferences {
-        return context.getSharedPreferences(appSharedPreferencesKey, Context.MODE_PRIVATE)
+    @Singleton
+    @AppDataStore
+    fun providePreferencesDataStore(
+        @ApplicationContext appContext: Context,
+        @AppDataStoreFileNameKey appDataStoreKey: String,
+    ): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create(
+            corruptionHandler = ReplaceFileCorruptionHandler(
+                produceNewData = { emptyPreferences() }
+            ),
+            migrations = listOf(SharedPreferencesMigration(appContext, appDataStoreKey)),
+            scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+            produceFile = { appContext.preferencesDataStoreFile(appDataStoreKey) }
+        )
     }
 }
