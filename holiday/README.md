@@ -13,5 +13,5 @@
 
 ### Icons
 
-- Icons from https://fonts.google.com/ & (badly) edited by
-  me.[build.gradle.kts](build.gradle.kts)[README.md](../jc-lottie/README.md)
+- Tree by Alice Design from [The Noun Project](https://thenounproject.com/browse/icons/term/tree/)
+- Christmas tree by Alice Design from [The Noun Project](https://thenounproject.com/browse/icons/term/christmas-tree/)
