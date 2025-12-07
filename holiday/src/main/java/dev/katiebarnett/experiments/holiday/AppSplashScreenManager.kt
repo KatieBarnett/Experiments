@@ -1,10 +1,13 @@
 package dev.katiebarnett.experiments.holiday
 
+import android.content.Context
 import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagStore
 
 class AppSplashScreenManager(
-    private val featureFlagStore: FeatureFlagStore
+    private val context: Context
 ) {
+
+    private val featureFlagStore by lazy { FeatureFlagStore.getInstance(context) }
 
     enum class SplashScreenStatus {
         DEFAULT, CHRISTMAS

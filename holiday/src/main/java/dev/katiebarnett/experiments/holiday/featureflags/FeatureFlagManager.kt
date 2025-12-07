@@ -1,6 +1,8 @@
 package dev.katiebarnett.experiments.holiday.featureflags
 
+import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -10,8 +12,10 @@ import javax.inject.Inject
 
 class FeatureFlagManager @Inject constructor(
     private val rocketFlagService: RocketFlagService,
-    private val featureFlagStorage: FeatureFlagStore,
+    @ApplicationContext private val context: Context,
 ) {
+
+    private val featureFlagStore by lazy { FeatureFlagStore.getInstance(context) }
 
     companion object {
         val featureFlagIds = listOf(
@@ -31,7 +35,7 @@ class FeatureFlagManager @Inject constructor(
                     }
                 }
             }.mapNotNull { it.await() }.forEach { featureFlag ->
-                featureFlagStorage.edit { preferences ->
+                featureFlagStore.edit { preferences ->
                     preferences[stringPreferencesKey(featureFlag.id)] = Json.encodeToString(featureFlag)
                 }
             }

@@ -43,21 +43,4 @@ class RocketFlagModule {
             )
             .build().create(RocketFlagService::class.java)
     }
-
-    @Provides
-    @Singleton
-    @FeatureFlagDataStore
-    fun providePreferencesDataStore(
-        @ApplicationContext appContext: Context,
-        @FeatureFlagDataStoreFileNameKey featureFlagDataStoreKey: String,
-    ): DataStore<Preferences> {
-        return PreferenceDataStoreFactory.create(
-            corruptionHandler = ReplaceFileCorruptionHandler(
-                produceNewData = { emptyPreferences() }
-            ),
-            migrations = listOf(SharedPreferencesMigration(appContext, featureFlagDataStoreKey)),
-            scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
-            produceFile = { appContext.preferencesDataStoreFile(featureFlagDataStoreKey) }
-        )
-    }
 }

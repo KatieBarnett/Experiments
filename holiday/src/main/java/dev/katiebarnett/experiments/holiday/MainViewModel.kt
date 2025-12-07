@@ -1,22 +1,26 @@
 package dev.katiebarnett.experiments.holiday
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagManager
 import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagStore
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-open class MainViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val featureFlagManager: FeatureFlagManager,
-    private val featureFlagStore: FeatureFlagStore,
 ) : ViewModel() {
 
     companion object {
         private const val ICON_STATUS_PREF_KEY = "ICON_STATUS"
     }
+
+    private val featureFlagStore by lazy { FeatureFlagStore.getInstance(context) }
 
     // For debugging and display
     val featureFlagFlow = featureFlagStore.featureFlagFlow
