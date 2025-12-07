@@ -1,4 +1,4 @@
-package dev.katiebarnett.experiments.holiday.toggles
+package dev.katiebarnett.experiments.holiday.featureflags
 
 import kotlinx.serialization.Serializable
 

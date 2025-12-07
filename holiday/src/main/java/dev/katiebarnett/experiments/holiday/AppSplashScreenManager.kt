@@ -1,18 +1,17 @@
 package dev.katiebarnett.experiments.holiday
 
-import dev.katiebarnett.experiments.holiday.toggles.FeatureFlagManager
-import javax.inject.Inject
+import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagStore
 
-class AppSplashScreenManager @Inject constructor(
-    private val featureFlagManager: FeatureFlagManager,
+class AppSplashScreenManager(
+    private val featureFlagStore: FeatureFlagStore
 ) {
 
     enum class SplashScreenStatus {
         DEFAULT, CHRISTMAS
     }
 
-    fun getSplashScreenStatus() = if (featureFlagManager.getFeatureFlag(
-            FeatureFlagManager.FLAG_ENABLE_CHRISTMAS_THEME
+    fun getSplashScreenStatus() = if (featureFlagStore.getFeatureFlag(
+            FeatureFlagStore.FLAG_ENABLE_CHRISTMAS_THEME
         )?.enabled == true
     ) {
         SplashScreenStatus.CHRISTMAS
@@ -22,7 +21,7 @@ class AppSplashScreenManager @Inject constructor(
 
     fun getThemedSplashScreenResId() =
         when (getSplashScreenStatus()) {
-            SplashScreenStatus.DEFAULT ->false
-            SplashScreenStatus.CHRISTMAS -> true
+            SplashScreenStatus.DEFAULT -> R.style.Theme_Experiments_Splash
+            SplashScreenStatus.CHRISTMAS -> R.style.Theme_Experiments_Splash_Christmas
         }
 }

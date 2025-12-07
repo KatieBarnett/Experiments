@@ -1,4 +1,4 @@
-package dev.katiebarnett.experiments.holiday.toggles
+package dev.katiebarnett.experiments.holiday.featureflags
 
 import retrofit2.Call
 import retrofit2.http.GET

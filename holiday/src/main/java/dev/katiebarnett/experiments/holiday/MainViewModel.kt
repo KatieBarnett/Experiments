@@ -1,18 +1,17 @@
 package dev.katiebarnett.experiments.holiday
 
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.katiebarnett.experiments.holiday.toggles.FeatureFlagManager
-import dev.katiebarnett.experiments.holiday.toggles.FeatureFlagManager.Companion.FLAG_ENABLE_CHRISTMAS_THEME
-import kotlinx.coroutines.flow.MutableStateFlow
+import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagManager
+import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagStore
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 open class MainViewModel @Inject constructor(
     private val featureFlagManager: FeatureFlagManager,
+    private val featureFlagStore: FeatureFlagStore,
 ) : ViewModel() {
 
     companion object {
@@ -20,7 +19,7 @@ open class MainViewModel @Inject constructor(
     }
 
     // For debugging and display
-    val featureFlagFlow = featureFlagManager.featureFlagFlow
+    val featureFlagFlow = featureFlagStore.featureFlagFlow
 
 
     init {

@@ -15,31 +15,34 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.compose.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.katiebarnett.experiments.core.theme.ExperimentsTheme
-import dev.katiebarnett.experiments.holiday.toggles.FeatureFlagManager
+import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagManager
+import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagStore
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var appSplashScreenManager: AppSplashScreenManager
+    val appSplashScreenManager: AppSplashScreenManager by lazy {
+        AppSplashScreenManager(FeatureFlagStore(@ApplicationContext this))
+    }
 
     @Inject
     lateinit var featureFlagManager: FeatureFlagManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // FIX DI
-//        appSplashScreenManager.getThemedSplashScreenResId()?.let {
-//
-//        }
+        appSplashScreenManager.getThemedSplashScreenResId()?.let {
+            theme = it
+        }
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
             val viewModel = hiltViewModel<MainViewModel>()
             val featureFlags by viewModel.featureFlagFlow.collectAsStateWithLifecycle(mapOf())
-            ExperimentsTheme {
+            AppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
