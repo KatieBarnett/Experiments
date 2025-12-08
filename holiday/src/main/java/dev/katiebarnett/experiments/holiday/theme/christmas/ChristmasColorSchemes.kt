@@ -1,13 +1,8 @@
-package dev.katiebarnett.experiments.holiday.theme
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
+package dev.katiebarnett.experiments.holiday.theme.christmas
 import androidx.compose.material3.lightColorScheme
-import androidx.compose.runtime.Composable
-import dev.katiebarnett.experiments.holiday.theme.christmas.darkSchemeChristmas
-import dev.katiebarnett.experiments.holiday.theme.christmas.lightSchemeChristmas
+import androidx.compose.material3.darkColorScheme
 
-private val lightScheme = lightColorScheme(
+internal val lightSchemeChristmas = lightColorScheme(
     primary = primaryLight,
     onPrimary = onPrimaryLight,
     primaryContainer = primaryContainerLight,
@@ -45,7 +40,7 @@ private val lightScheme = lightColorScheme(
     surfaceContainerHighest = surfaceContainerHighestLight,
 )
 
-private val darkScheme = darkColorScheme(
+internal val darkSchemeChristmas = darkColorScheme(
     primary = primaryDark,
     onPrimary = onPrimaryDark,
     primaryContainer = primaryContainerDark,
@@ -83,32 +78,3 @@ private val darkScheme = darkColorScheme(
     surfaceContainerHighest = surfaceContainerHighestDark,
 )
 
-enum class ThemeMode {
-    DEFAULT, CHRISTMAS
-}
-
-@Composable
-fun AppTheme(
-    themeMode: ThemeMode = ThemeMode.DEFAULT,
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false, // For this demo, I will ignore the dynamic color
-    content:
-    @Composable () -> Unit
-) {
-    val colorScheme = when (themeMode) {
-        ThemeMode.DEFAULT -> when (darkTheme) {
-            true -> darkScheme
-            false -> lightScheme
-        }
-        ThemeMode.CHRISTMAS -> when (darkTheme) {
-            true -> darkSchemeChristmas
-            false -> lightSchemeChristmas
-        }
-    }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = AppTypography,
-        content = content
-    )
-}

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="splash_background">#F5F5F6</color>
+    <color name="splash_background">#CDEDA3</color>
+    <color name="splash_background_christmas">#354e16</color>
     <color name="ic_launcher_background">#CDEDA3</color>
     <color name="ic_launcher_background_dark">#354e16</color>
+    <color name="ic_launcher_background_christmas">#354e16</color>
 
 </resources>

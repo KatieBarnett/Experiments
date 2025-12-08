@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -36,7 +37,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -44,13 +44,13 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.compose.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import dev.katiebarnett.experiments.core.theme.ExperimentsTheme
 import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagManager
 import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagStore.Companion.FLAG_ENABLE_CHRISTMAS_THEME
+import dev.katiebarnett.experiments.holiday.theme.AppTheme
+import dev.katiebarnett.experiments.holiday.theme.ThemeMode
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -65,15 +65,23 @@ class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+        // If we want to change the splash screen, this needs to be done before we install it.
+        // Because this happens before onCreate we need to ensure that it does not rely on any
+        // dependency injected code
+        setTheme(appSplashScreenManager.getThemedSplashScreenResId())
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        appSplashScreenManager.getThemedSplashScreenResId()?.let {
-            // Theme setting logic if needed
-        }
+        enableEdgeToEdge()
         setContent {
             val viewModel = hiltViewModel<MainViewModel>()
             val featureFlags by viewModel.featureFlagFlow.collectAsStateWithLifecycle(mapOf())
-            AppTheme {
+            AppTheme(
+                themeMode = if (featureFlags[FLAG_ENABLE_CHRISTMAS_THEME]?.enabled == true) {
+                    ThemeMode.CHRISTMAS
+                } else {
+                    ThemeMode.DEFAULT
+                }
+            ) {
                 Scaffold(
                     topBar = {
                         TopAppBar(
@@ -188,9 +196,13 @@ fun RatingBar(rating: Int) {
             Icon(
                 imageVector = if (index < rating) Icons.Filled.Star else Icons.Outlined.Star,
                 contentDescription = null,
-                tint = if (index < rating) Color(
-                    0xFFFFD700
-                ) else MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.5f),
+                tint = if (index < rating) {
+                    Color(
+                        0xFFFFD700
+                    )
+                } else {
+                    MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.5f)
+                },
                 modifier = Modifier.size(24.dp)
             )
         }
@@ -212,7 +224,9 @@ fun TreeListPreview() {
 @Composable
 fun TreeItemPreview() {
     AppTheme {
-        TreeItem(Tree("Oak", "A strong and sturdy tree known for its longevity and hard wood. It provides great shade.", 5))
+        TreeItem(
+            Tree("Oak", "A strong and sturdy tree known for its longevity and hard wood. It provides great shade.", 5)
+        )
     }
 }
 

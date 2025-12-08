@@ -10,7 +10,8 @@
 
 
     <style name="Theme.Experiments.Splash.Christmas" parent="Theme.Experiments.Splash">
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground_dark</item>
+        <item name="windowSplashScreenBackground">@color/splash_background_christmas</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground_christmas</item>
     </style>
     
 </resources>
