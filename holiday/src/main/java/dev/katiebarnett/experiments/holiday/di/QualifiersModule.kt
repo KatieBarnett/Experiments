@@ -8,17 +8,17 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class AppDataStoreFileNameKey
+annotation class FeatureFlagFileNameKey
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class AppDataStore
+annotation class FeatureFlagDataStore
 
 @Module
 @InstallIn(SingletonComponent::class)
 object QualifiersModule {
 
     @Provides
-    @AppDataStoreFileNameKey
-    fun provideAppDataStoreFileNameKey() = "app_shared_preferences"
+    @FeatureFlagFileNameKey
+    fun provideFeatureFlagFileNameKey() = "feature_flags"
 }

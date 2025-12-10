@@ -5,6 +5,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlag
+import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagStore.Companion.FLAG_ENABLE_CHRISTMAS_THEME
 import dev.katiebarnett.experiments.holiday.theme.christmas.darkSchemeChristmas
 import dev.katiebarnett.experiments.holiday.theme.christmas.lightSchemeChristmas
 
@@ -86,6 +88,14 @@ private val darkScheme = darkColorScheme(
 
 enum class ThemeMode {
     DEFAULT, CHRISTMAS
+}
+
+fun getThemeMode(featureFlags: Map<String, FeatureFlag>): ThemeMode {
+    return if (featureFlags[FLAG_ENABLE_CHRISTMAS_THEME]?.enabled == true) {
+        ThemeMode.CHRISTMAS
+    } else {
+        ThemeMode.DEFAULT
+    }
 }
 
 @Composable

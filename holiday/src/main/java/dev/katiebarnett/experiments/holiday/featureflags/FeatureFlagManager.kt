@@ -12,10 +12,9 @@ import javax.inject.Inject
 
 class FeatureFlagManager @Inject constructor(
     private val rocketFlagService: RocketFlagService,
+    private val featureFlagStore: FeatureFlagStore,
     @ApplicationContext private val context: Context,
 ) {
-
-    private val featureFlagStore by lazy { FeatureFlagStore.getInstance(context) }
 
     companion object {
         val featureFlagIds = listOf(

@@ -49,7 +49,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagManager
 import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagStore.Companion.FLAG_ENABLE_CHRISTMAS_THEME
 import dev.katiebarnett.experiments.holiday.theme.AppTheme
-import dev.katiebarnett.experiments.holiday.theme.ThemeMode
+import dev.katiebarnett.experiments.holiday.theme.getThemeMode
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -66,11 +66,7 @@ class MainActivity : ComponentActivity() {
             val viewModel = hiltViewModel<MainViewModel>()
             val featureFlags by viewModel.featureFlagFlow.collectAsStateWithLifecycle(mapOf())
             AppTheme(
-                themeMode = if (featureFlags[FLAG_ENABLE_CHRISTMAS_THEME]?.enabled == true) {
-                    ThemeMode.CHRISTMAS
-                } else {
-                    ThemeMode.DEFAULT
-                }
+                themeMode = getThemeMode(featureFlags)
             ) {
                 Scaffold(
                     topBar = {
