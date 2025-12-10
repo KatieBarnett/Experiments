@@ -4,15 +4,18 @@ import android.app.Application
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.HiltAndroidApp
+import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagStore
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltAndroidApp
-class AppIconApplication : Application() {
+class TreeApplication : Application() {
 
     @Inject
-    lateinit var appIconManager: AppIconManager
+    lateinit var appIconManager: AppThemeManager
 
     override fun onCreate() {
         super.onCreate()
@@ -20,12 +23,14 @@ class AppIconApplication : Application() {
         registerLifecycleObserver()
     }
 
-    // need lifecycle process dependency
+    // Need lifecycle process dependency
     private fun registerLifecycleObserver() {
         ProcessLifecycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onStop(owner: LifecycleOwner) {
                 super.onStop(owner)
-                appIconManager.updateAppIconForThemedCampaign()
+                owner.lifecycleScope.launch {
+                    appIconManager.updateAppAliasForThemeMode()
+                }
             }
         })
     }

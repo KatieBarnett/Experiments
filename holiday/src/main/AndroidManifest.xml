@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".AppIconApplication"
+        android:name=".TreeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,17 +15,17 @@
             android:name="dev.katiebarnett.experiments.holiday.StartUpActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@style/Theme.Experiments.Splash"></activity>
+            android:theme="@style/Theme.Experiments.Splash"/>
         <activity
             android:name="dev.katiebarnett.experiments.holiday.StartUpActivityChristmas"
             android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@style/Theme.Experiments.Splash.Christmas"></activity>
+            android:theme="@style/Theme.Experiments.Splash.Christmas"/>
 
         <activity
             android:name="dev.katiebarnett.experiments.holiday.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Experiments"></activity>
+            android:theme="@style/Theme.Experiments"/>
 
         <activity-alias
             android:label="@string/app_name"
