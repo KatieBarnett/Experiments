@@ -36,7 +36,8 @@ class FeatureFlagManager @Inject constructor(
                 }
             }.mapNotNull { it.await() }.forEach { featureFlag ->
                 featureFlagStore.edit { preferences ->
-                    preferences[stringPreferencesKey(featureFlag.id)] = Json.encodeToString(featureFlag)
+                    preferences[stringPreferencesKey(featureFlag.id)] =
+                        Json.encodeToString(featureFlag)
                 }
             }
         }

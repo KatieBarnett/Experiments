@@ -2,9 +2,9 @@
 <resources>
 
     <color name="splash_background">#CDEDA3</color>
-    <color name="splash_background_christmas">#354e16</color>
+    <color name="splash_background_christmas">#275e47</color>
     <color name="ic_launcher_background">#CDEDA3</color>
     <color name="ic_launcher_background_dark">#354e16</color>
-    <color name="ic_launcher_background_christmas">#354e16</color>
+    <color name="ic_launcher_background_christmas">#275e47</color>
 
 </resources>

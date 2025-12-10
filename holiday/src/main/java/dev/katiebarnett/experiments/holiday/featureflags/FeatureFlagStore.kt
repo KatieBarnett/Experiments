@@ -24,7 +24,7 @@ import timber.log.Timber
 // Because I want to be able to access these values before dependency injection happens, this can't
 // be an injected class
 class FeatureFlagStore private constructor(
-    @ApplicationContext private val appContext: Context
+    @ApplicationContext private val appContext: Context,
 ) {
 
     private val dataStore: DataStore<Preferences> = PreferenceDataStoreFactory.create(

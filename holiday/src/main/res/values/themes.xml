@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
     <style name="Theme.Experiments.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/splash_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="postSplashScreenTheme">@style/Theme.Experiments</item>
     </style>
 
-
     <style name="Theme.Experiments.Splash.Christmas" parent="Theme.Experiments.Splash">
         <item name="windowSplashScreenBackground">@color/splash_background_christmas</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground_christmas</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground_christmas
+        </item>
+        <item name="postSplashScreenTheme">@style/Theme.Experiments</item>
     </style>
-    
+
 </resources>

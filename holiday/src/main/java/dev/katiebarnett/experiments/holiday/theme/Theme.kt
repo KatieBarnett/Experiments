@@ -1,4 +1,5 @@
 package dev.katiebarnett.experiments.holiday.theme
+
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -93,7 +94,7 @@ fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false, // For this demo, I will ignore the dynamic color
     content:
-    @Composable () -> Unit
+    @Composable () -> Unit,
 ) {
     val colorScheme = when (themeMode) {
         ThemeMode.DEFAULT -> when (darkTheme) {

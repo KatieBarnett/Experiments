@@ -43,7 +43,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,20 +55,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val appSplashScreenManager: AppSplashScreenManager by lazy {
-        AppSplashScreenManager(this)
-    }
-
     @Inject
     lateinit var featureFlagManager: FeatureFlagManager
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        // If we want to change the splash screen, this needs to be done before we install it.
-        // Because this happens before onCreate we need to ensure that it does not rely on any
-        // dependency injected code
-        setTheme(appSplashScreenManager.getThemedSplashScreenResId())
-        installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
@@ -132,22 +122,46 @@ data class Tree(val name: String, val description: String, val rating: Int)
 @Composable
 fun TreeList(modifier: Modifier = Modifier) {
     val trees = listOf(
-        Tree("Oak", "A strong and sturdy tree known for its longevity and hard wood. It provides great shade.", 5),
+        Tree(
+            "Oak",
+            "A strong and sturdy tree known for its longevity and hard wood. It provides great shade.",
+            5
+        ),
         Tree(
             "Pine",
             "An evergreen coniferous tree that has clusters of needle-shaped leaves. Smells like Christmas.",
             4
         ),
-        Tree("Maple", "Famous for its distinct leaves and syrup. The autumn colors are breathtaking.", 5),
-        Tree("Birch", "Known for its distinctive white bark and delicate leaves. Adds a nice contrast to forests.", 3),
-        Tree("Willow", "Graceful tree with sweeping branches that often grow near water. Very poetic.", 4),
-        Tree("Redwood", "The tallest trees on Earth, ancient and majestic. Truly awe-inspiring giants.", 5),
+        Tree(
+            "Maple",
+            "Famous for its distinct leaves and syrup. The autumn colors are breathtaking.",
+            5
+        ),
+        Tree(
+            "Birch",
+            "Known for its distinctive white bark and delicate leaves. Adds a nice contrast to forests.",
+            3
+        ),
+        Tree(
+            "Willow",
+            "Graceful tree with sweeping branches that often grow near water. Very poetic.",
+            4
+        ),
+        Tree(
+            "Redwood",
+            "The tallest trees on Earth, ancient and majestic. Truly awe-inspiring giants.",
+            5
+        ),
         Tree(
             "Cherry Blossom",
             "Beautiful pink flowers in spring. A symbol of renewal and the fleeting nature of life.",
             5
         ),
-        Tree("Spruce", "A coniferous evergreen tree often used as a Christmas tree. Has a classic shape.", 4)
+        Tree(
+            "Spruce",
+            "A coniferous evergreen tree often used as a Christmas tree. Has a classic shape.",
+            4
+        )
     )
 
     LazyColumn(
@@ -225,7 +239,11 @@ fun TreeListPreview() {
 fun TreeItemPreview() {
     AppTheme {
         TreeItem(
-            Tree("Oak", "A strong and sturdy tree known for its longevity and hard wood. It provides great shade.", 5)
+            Tree(
+                "Oak",
+                "A strong and sturdy tree known for its longevity and hard wood. It provides great shade.",
+                5
+            )
         )
     }
 }

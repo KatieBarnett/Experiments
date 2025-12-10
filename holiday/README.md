@@ -4,6 +4,8 @@
 
 ## Resources
 
+- Feature Flagging by [Rocket Flag](https://rocketflag.app/?utm_source=katie-github)
+
 ### Useful links
 
 - Official docs: https://developer.android.com/develop/ui/views/launch/icon_design_adaptive
