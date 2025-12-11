@@ -28,6 +28,16 @@ class AppThemeManager @Inject constructor(
         }
     }
 
+    suspend fun shouldAppAliasBeUpdatedForThemeMode(): Boolean {
+        val currentThemeMode = getThemeMode(featureFlagStore.featureFlagFlow.first())
+        return context.packageManager.getComponentEnabledSetting(
+            ComponentName(
+                BuildConfig.APPLICATION_ID,
+                "${BuildConfig.APPLICATION_ID}.${currentThemeMode.name}"
+            )
+        ) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+    }
+
     suspend fun updateAppAliasForThemeMode() {
         val currentThemeMode = getThemeMode(featureFlagStore.featureFlagFlow.first())
         for (theme in ThemeMode.entries) {

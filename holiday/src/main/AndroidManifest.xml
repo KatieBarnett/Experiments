@@ -12,18 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Experiments">
         <activity
-            android:name="dev.katiebarnett.experiments.holiday.StartUpActivity"
+            android:name=".StartUpActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Experiments.Splash"/>
         <activity
-            android:name="dev.katiebarnett.experiments.holiday.StartUpActivityChristmas"
+            android:name=".StartUpActivityChristmas"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Experiments.Splash.Christmas"/>
 
         <activity
-            android:name="dev.katiebarnett.experiments.holiday.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Experiments"/>
 
