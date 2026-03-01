@@ -229,7 +229,7 @@ fun PinnedTopAppBarScreen(navController: NavController, modifier: Modifier = Mod
                 title = { Text(text = stringResource(id = R.string.title)) },
                 navigationIcon = { NavigationIcon(navController = navController)},
                 actions = { AboutActionIcon(navController) },
-                colors = TopAppBarDefaults.smallTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = topAppBarContainerColor,
                     scrolledContainerColor = MaterialTheme.colorScheme.surface, // Ignored
                     navigationIconContentColor = topAppBarElementColor,
@@ -282,7 +282,7 @@ fun FixedTopAppBarScreen(navController: NavController, modifier: Modifier = Modi
                 title = { Text(text = stringResource(id = R.string.title)) },
                 navigationIcon = { NavigationIcon(navController = navController)},
                 actions = { AboutActionIcon(navController) },
-                colors = TopAppBarDefaults.smallTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = topAppBarContainerColor,
                     scrolledContainerColor = MaterialTheme.colorScheme.surface, // Ignored
                     navigationIconContentColor = topAppBarElementColor,

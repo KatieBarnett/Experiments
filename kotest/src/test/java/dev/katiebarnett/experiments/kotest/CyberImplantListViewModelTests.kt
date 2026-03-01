@@ -1,11 +1,8 @@
 package dev.katiebarnett.experiments.kotest
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Rule
-import org.junit.runner.RunWith
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 
 /**

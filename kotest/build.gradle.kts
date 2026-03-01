@@ -37,9 +37,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
     //    testOptions {
 //        unitTests.all {
 //            useJUnitPlatform()
@@ -63,6 +60,11 @@ android {
 //    }
 //}
 
+kotlin {
+    jvmToolchain(libs.versions.jdkVersion.get().toInt())
+}
+
+
 dependencies {
     implementation(project(":core"))
 
@@ -72,20 +74,7 @@ dependencies {
 //    implementation 'androidx.test.ext:junit-ktx:1.1.3'
     debugImplementation(libs.bundles.jetpackComposeLibsDebug)
     implementation(libs.bundles.lifecycleLibs)
-    
-    
-    
-//    testImplementation 'junit:junit:4.13.2'
-//
-//    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
-//    testImplementation "androidx.arch.core:core-testing:2.1.0"
-//
-//    testImplementation "androidx.test:core-ktx:1.4.0"
-//    testImplementation "androidx.test.ext:junit:1.1.3"
-//
-//    testImplementation "io.kotest:kotest-runner-junit5:$kotest_version"
-//    testImplementation "io.kotest:kotest-assertions-core:$kotest_version"
-//    testImplementation "io.kotest:kotest-property:$kotest_version"
-//
-//    debugImplementation "androidx.compose.ui:ui-test-manifest"
+
+    testImplementation(libs.bundles.testLibs)
+    androidTestImplementation(libs.bundles.androidTestLibs)
 }

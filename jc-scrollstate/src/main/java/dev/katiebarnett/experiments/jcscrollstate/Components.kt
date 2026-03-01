@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun topAppBarColors() = TopAppBarDefaults.smallTopAppBarColors(
+fun topAppBarColors() = TopAppBarDefaults.topAppBarColors(
     containerColor = MaterialTheme.colorScheme.primary,
     scrolledContainerColor = MaterialTheme.colorScheme.surface,
     navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,

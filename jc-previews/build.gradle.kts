@@ -40,10 +40,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
 }
+
+kotlin {
+    jvmToolchain(libs.versions.jdkVersion.get().toInt())
+}
+
 
 dependencies {
     implementation(project(":core"))
@@ -53,15 +55,14 @@ dependencies {
     implementation(libs.bundles.uiLibs)
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.jetpackComposeLibs)
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.common.ktx)
+    implementation(libs.firebase.analytics)
     debugImplementation(libs.bundles.jetpackComposeLibsDebug)
     implementation(libs.bundles.lifecycleLibs)
     implementation(libs.hilt.navigation.compose)
 
     implementation(libs.coil)
-
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
 
     ksp(libs.hilt.compiler)
 }

@@ -39,9 +39,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+}
+
+kotlin {
+    jvmToolchain(libs.versions.jdkVersion.get().toInt())
 }
 
 dependencies {
@@ -57,4 +58,7 @@ dependencies {
     implementation(libs.bundles.lifecycleLibs)
 
     ksp(libs.hilt.compiler)
+
+    testImplementation(libs.bundles.testLibs)
+    androidTestImplementation(libs.bundles.androidTestLibs)
 }

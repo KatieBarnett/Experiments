@@ -97,8 +97,8 @@ fun StackLayout(
     Layout(
         modifier = modifier.fillMaxSize(),
         content = {
-            leftStack(modifier = Modifier.layoutId("LeftStack"))
-            rightStack(modifier = Modifier.layoutId("RightStack"))
+            leftStack(Modifier.layoutId("LeftStack"))
+            rightStack(Modifier.layoutId("RightStack"))
             flipCard?.let {
                 val modifier = Modifier
                     .layoutId("FlipCard")
@@ -166,8 +166,8 @@ fun StackTranslateLayout(
     Layout(
         modifier = modifier.fillMaxSize(),
         content = {
-            leftStack(modifier = Modifier.layoutId("LeftStack"))
-            rightStack(modifier = Modifier.layoutId("RightStack"))
+            leftStack(Modifier.layoutId("LeftStack"))
+            rightStack(Modifier.layoutId("RightStack"))
             flipCard?.let {
                 CardFaceDisplay(flipCard.back, Modifier.layoutId("FlipCard"))
             }
@@ -208,10 +208,10 @@ fun NonAnimatedStackLayout(
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(Dimen.Card.spacing), modifier = modifier) {
         Box(modifier = Modifier.weight(1f)) {
-            leftStack
+            leftStack(Modifier)
             CardFaceDisplay(flipCard?.back)
         }
-        rightStack(modifier = Modifier.weight(1f))
+        rightStack(Modifier.weight(1f))
     }
 }
 
@@ -225,8 +225,8 @@ fun NonAnimatedCustomStackLayout(
     Layout(
         modifier = modifier.fillMaxSize(),
         content = {
-            leftStack(modifier = Modifier.layoutId("LeftStack"))
-            rightStack(modifier = Modifier.layoutId("RightStack"))
+            leftStack(Modifier.layoutId("LeftStack"))
+            rightStack(Modifier.layoutId("RightStack"))
             flipCard?.let {
                 CardFaceDisplay(flipCard.back, modifier = Modifier.layoutId("FlipCard"))
             }

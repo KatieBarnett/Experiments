@@ -34,7 +34,7 @@ fun ModifierScene(
             onNightClick = { value -> nighttime = value },
             onTorchClick = { value -> torchon = value }
         )
-        scene(nighttime = nighttime, torchon = torchon)
+        scene(nighttime, torchon)
     }
 }
 
