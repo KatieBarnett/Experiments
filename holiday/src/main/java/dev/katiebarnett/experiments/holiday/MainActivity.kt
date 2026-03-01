@@ -34,6 +34,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -56,6 +57,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var featureFlagManager: FeatureFlagManager
+
+    @Inject
+    lateinit var appThemeManager: AppThemeManager
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,9 +107,49 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) { innerPadding ->
+
                     TreeList(
                         modifier = Modifier.padding(innerPadding)
                     )
+
+                    // Theme change dialog method
+//                    var showUpdateTheme by rememberSaveable { mutableStateOf(false) }
+//                    val coroutineScope: CoroutineScope = rememberCoroutineScope()
+//
+//                    LaunchedEffect(featureFlags) {
+//                        // Check whether we need to update the app icon when the feature flags change
+//                        if (!appThemeManager.shouldAppAliasBeUpdatedForThemeMode()) {
+//                            showUpdateTheme = true
+//                        }
+//                    }
+//
+//                    if (showUpdateTheme) {
+//                        AlertDialog(
+//                            onDismissRequest = { showUpdateTheme = false },
+//                            title = { Text("New app theme") },
+//                            text = {
+//                                Text(
+//                                    "We have a new app theme. Do you want to restart the app to apply the change?"
+//                                )
+//                            },
+//                            confirmButton = {
+//                                TextButton(onClick = {
+//                                    coroutineScope.launch {
+//                                        appThemeManager.updateAppAliasForThemeMode()
+//                                    }
+//                                }) {
+//                                    Text("Restart App")
+//                                }
+//                            },
+//                            dismissButton = {
+//                                TextButton(onClick = {
+//                                    showUpdateTheme = false
+//                                }) {
+//                                    Text("Cancel")
+//                                }
+//                            },
+//                        )
+//                    }
                 }
             }
         }

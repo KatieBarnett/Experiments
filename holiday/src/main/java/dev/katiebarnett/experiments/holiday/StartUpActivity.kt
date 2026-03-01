@@ -11,13 +11,21 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@AndroidEntryPoint
+class StartUpActivityChristmas : StartUpActivity()
 
 @AndroidEntryPoint
 open class StartUpActivity : ComponentActivity() {
     private val viewModel: StartUpViewModel by viewModels()
 
+    @Inject
+    lateinit var appThemeManager: AppThemeManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
-//        setTheme(appSplashScreenManager.getThemedSplashScreenResId())
+        // Don't do this - it doesn't work:
+        // setTheme(appThemeManager.getThemedSplashScreenResId())
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

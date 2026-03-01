@@ -6,7 +6,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.HiltAndroidApp
-import dev.katiebarnett.experiments.holiday.featureflags.FeatureFlagStore
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -23,7 +22,6 @@ class TreeApplication : Application() {
         registerLifecycleObserver()
     }
 
-    // Need lifecycle process dependency
     private fun registerLifecycleObserver() {
         ProcessLifecycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onStop(owner: LifecycleOwner) {
