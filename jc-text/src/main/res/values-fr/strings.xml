@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="welcome_message">Bienvenue!</string>
+    <string name="button_text">Afficher Le Message</string>
+
+
+</resources>

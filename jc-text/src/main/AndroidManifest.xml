@@ -8,8 +8,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Experiments">
+
+        <!--            android:configChanges="locale|layoutDirection|uiMode"-->
         <activity
             android:name="dev.katiebarnett.experiments.jctext.MainActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|locale|layoutDirection|uiMode"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Experiments">

@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Jetpack Compose Text Experiments</string>
+    <string name="app_name" translatable="false">Jetpack Compose Text Experiments</string>
+
+    <string name="welcome_message">Welcome!</string>
+    <string name="button_text">Show Message</string>
+
 </resources>
