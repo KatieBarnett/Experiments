@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "dev.katiebarnett.experiments.graphql"
-        minSdk = rootProject.extra["wearMinSdk"] as Int
+        minSdk = rootProject.extra["minSdk"] as Int
         targetSdk = rootProject.extra["targetSdk"] as Int
         versionCode = rootProject.extra["appVersionCode"] as Int
         versionName = rootProject.extra["appVersionName"] as String

@@ -10,7 +10,7 @@ android {
     compileSdk = rootProject.extra["compileSdk"] as Int
 
     defaultConfig {
-        minSdk = rootProject.extra["wearMinSdk"] as Int
+        minSdk = rootProject.extra["minSdk"] as Int
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
